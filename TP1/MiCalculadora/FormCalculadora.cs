@@ -36,6 +36,13 @@ namespace MiCalculadora
             lblResultado.Text = " ";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numero1"></param>
+        /// <param name="numero2"></param>
+        /// <param name="operador"></param>
+        /// <returns></returns>
         private static double Operar(string numero1, string numero2, string operador)
         {
             //llama al metodo Operar de la calculadora y devuelve el resultado en double
@@ -80,11 +87,19 @@ namespace MiCalculadora
 
             lblResultado.Text = resultado.ToString();
 
-            if (operador==" ")
+            if (resultado==double.MinValue)
             {
-                operador = "+";
+                MessageBox.Show("Error. No es posible dividir por 0");
             }
-            lstOperaciones.Items.Add($"{numero1}{operador}{numero2}={resultado.ToString()}");
+            else
+            {
+                if (operador == " ")
+                {
+                    operador = "+";
+                }
+                lstOperaciones.Items.Add($"{numero1}{operador}{numero2}={resultado.ToString()}");
+            }
+
         }
 
         private void btnConvertirADecimal_Click(object sender, EventArgs e)
@@ -92,16 +107,36 @@ namespace MiCalculadora
             
             string binarioAConvertir = lblResultado.Text;
             string decimalConvertido = Operando.BinarioDecimal(binarioAConvertir);
-            lblResultado.Text = decimalConvertido;
-            lstOperaciones.Items.Add($"{binarioAConvertir}->{decimalConvertido}");
+            
+            if (decimalConvertido != "Valor invalido")
+            {
+                lblResultado.Text = decimalConvertido;
+                lstOperaciones.Items.Add($"{binarioAConvertir}->{decimalConvertido}");
+            }
+            else
+            {
+                MessageBox.Show("Error. Valor inválido");
+            }
+            
         }
 
         private void btnConvertirABinario_Click(object sender, EventArgs e)
         {
             string decimalAConvertir = lblResultado.Text;
             string binarioConvertido = Operando.DecimalBinario(decimalAConvertir);
-            lblResultado.Text = binarioConvertido;
-            lstOperaciones.Items.Add($"{decimalAConvertir}->{binarioConvertido}");
+            
+            if(binarioConvertido != "Valor invalido")
+            {
+                lblResultado.Text = binarioConvertido;
+                lstOperaciones.Items.Add($"{decimalAConvertir}->{binarioConvertido}");
+            }
+            else
+            {
+                MessageBox.Show("Error. Valor inválido");
+            }
+
         }
+
+        
     }
 }

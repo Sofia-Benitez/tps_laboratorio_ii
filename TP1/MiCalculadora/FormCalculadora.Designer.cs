@@ -133,7 +133,7 @@ namespace MiCalculadora
             this.lblResultado.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.lblResultado.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblResultado.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.lblResultado.Location = new System.Drawing.Point(185, 13);
+            this.lblResultado.Location = new System.Drawing.Point(68, 13);
             this.lblResultado.Name = "lblResultado";
             this.lblResultado.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblResultado.Size = new System.Drawing.Size(33, 37);
