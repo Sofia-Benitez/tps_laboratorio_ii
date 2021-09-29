@@ -61,7 +61,7 @@ namespace Entidades
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendFormat("Tenemos {0} lugares ocupados de un total de {1} disponibles", taller.vehiculos.Count, taller.espacioDisponible);
+            sb.AppendLine($"Tenemos {taller.vehiculos.Count} lugares ocupados de un total de {taller.espacioDisponible} disponibles");
             sb.AppendLine("");
             foreach (Vehiculo vehiculo in taller.vehiculos)
             {
@@ -100,7 +100,7 @@ namespace Entidades
 
         #region "Operadores"
         /// <summary>
-        /// Agregará un elemento a la lista
+        /// Sobrecarga del operador +. Agregará un elemento a la lista
         /// </summary>
         /// <param name="taller">Objeto donde se agregará el elemento</param>
         /// <param name="vehiculo">Objeto a agregar</param>
@@ -123,7 +123,7 @@ namespace Entidades
             return taller;
         }
         /// <summary>
-        /// Quitará un elemento de la lista
+        /// Sobrecarga del operador -. Quitará un elemento de la lista
         /// </summary>
         /// <param name="taller">Objeto donde se quitará el elemento</param>
         /// <param name="vehiculo">Objeto a quitar</param>
