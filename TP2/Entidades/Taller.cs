@@ -18,11 +18,19 @@ namespace Entidades
             Ciclomotor, Sedan, SUV, Todos
         }
 
+        
         #region "Constructores"
+        /// <summary>
+        /// Constructor que inicializa la lista de vehiculos.
+        /// </summary>
         private Taller()
         {
             this.vehiculos = new List<Vehiculo>();
         }
+        /// <summary>
+        /// Constructor que recibe por parametro el espacio disponible
+        /// </summary>
+        /// <param name="espacioDisponible"></param>
         public Taller(int espacioDisponible):this()
         {
             this.espacioDisponible = espacioDisponible;
@@ -31,10 +39,10 @@ namespace Entidades
 
         #region "Sobrecargas"
         /// <summary>
-        /// Muestro el estacionamiento y TODOS los vehículos
+        /// Sobrecarha del metodo ToString(). Llama al metodo listar pasando como tipo todos los vehiculos. Muestro el estacionamiento y TODOS los vehículos
         /// </summary>
         /// <returns></returns>
-        public string ToString()
+        public override string ToString()
         {
             return Taller.Listar(this, ETipo.Todos);
         }
@@ -55,33 +63,33 @@ namespace Entidades
 
             sb.AppendFormat("Tenemos {0} lugares ocupados de un total de {1} disponibles", taller.vehiculos.Count, taller.espacioDisponible);
             sb.AppendLine("");
-            foreach (Vehiculo v in taller.vehiculos)
+            foreach (Vehiculo vehiculo in taller.vehiculos)
             {
                 switch (tipo)
                 {
                     case ETipo.SUV:
-                        if(v is Suv)
+                        if(vehiculo is Suv)
                         {
-                            sb.AppendLine(v.Mostrar());
+                            sb.AppendLine(vehiculo.Mostrar());
                         }
                         
                         break;
                     case ETipo.Ciclomotor:
-                        if(v is Ciclomotor)
+                        if(vehiculo is Ciclomotor)
                         {
-                            sb.AppendLine(v.Mostrar());
+                            sb.AppendLine(vehiculo.Mostrar());
                         }
                         
                         break;
                     case ETipo.Sedan:
-                        if(v is Sedan)
+                        if(vehiculo is Sedan)
                         {
-                            sb.AppendLine(v.Mostrar());
+                            sb.AppendLine(vehiculo.Mostrar());
                         }
                         
                         break;
                     default:
-                        sb.AppendLine(v.Mostrar());
+                        sb.AppendLine(vehiculo.Mostrar());
                         break;
                 }
             }
@@ -99,7 +107,7 @@ namespace Entidades
         /// <returns></returns>
         public static Taller operator +(Taller taller, Vehiculo vehiculo)
         {
-            if(taller.vehiculos.Count<taller.espacioDisponible && !(taller.vehiculos is null))
+            if(taller.vehiculos.Count<taller.espacioDisponible)
             {
                 foreach (Vehiculo v in taller.vehiculos)
                 {

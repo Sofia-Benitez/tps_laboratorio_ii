@@ -8,6 +8,12 @@ namespace Entidades
 {
     public class Ciclomotor : Vehiculo
     {
+        /// <summary>
+        /// Constructor de ciclomotor
+        /// </summary>
+        /// <param name="marca"></param>
+        /// <param name="chasis"></param>
+        /// <param name="color"></param>
         public Ciclomotor(EMarca marca, string chasis, ConsoleColor color)
             :base(chasis, marca, color)
         {
@@ -15,7 +21,7 @@ namespace Entidades
         }
         
         /// <summary>
-        /// Ciclomotor son 'Chico'
+        /// Propiedad que devuelve el tamaño de Ciclomotor. Ciclomotor son 'Chico'
         /// </summary>
         protected override ETamanio Tamanio
         {
@@ -25,14 +31,16 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// metodo que sobreescribe el metodo de la clase base agregando con StringBuilder la informacion de la clase 
+        /// </summary>
+        /// <returns></returns>
         public override sealed string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("CICLOMOTOR");
             sb.AppendLine(base.Mostrar());
-            sb.AppendFormat("TAMAÑO : {0}", this.Tamanio);
-            sb.AppendLine("");
             sb.AppendLine("---------------------");
 
             return sb.ToString();

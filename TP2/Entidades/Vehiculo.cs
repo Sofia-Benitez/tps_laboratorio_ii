@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     /// <summary>
-    /// La clase Vehiculo no deberá permitir que se instancien elementos de este tipo.
+    /// Clase abstracta Vehiculo
     /// </summary>
     public abstract class Vehiculo
     {
@@ -24,6 +24,12 @@ namespace Entidades
         private string chasis;
         private ConsoleColor color;
 
+        /// <summary>
+        /// constructor de la clase base 
+        /// </summary>
+        /// <param name="chasis"></param>
+        /// <param name="marca"></param>
+        /// <param name="color"></param>
         public Vehiculo(string chasis, EMarca marca, ConsoleColor color)
         {
             this.chasis = chasis;
@@ -37,7 +43,7 @@ namespace Entidades
         protected abstract ETamanio Tamanio { get; }
 
         /// <summary>
-        /// Publica todos los datos del Vehiculo.
+        /// Metodo que utiliza la sobrecarga exolicita de string para mostrar todos los elementos
         /// </summary>
         /// <returns></returns>
         public virtual string Mostrar()
@@ -45,6 +51,10 @@ namespace Entidades
             return (string)this;
         }
 
+        /// <summary>
+        /// sobrecarga del operador string. Utiliza StringBuilder para mostrar los datos 
+        /// </summary>
+        /// <param name="p"></param>
         public static explicit operator string(Vehiculo p)
         {
             StringBuilder sb = new StringBuilder();
@@ -52,13 +62,14 @@ namespace Entidades
             sb.AppendFormat("CHASIS: {0}\r\n", p.chasis);
             sb.AppendFormat("MARCA : {0}\r\n", p.marca.ToString());
             sb.AppendFormat("COLOR : {0}\r\n", p.color.ToString());
-            sb.AppendFormat("---------------------");
+            sb.AppendFormat("---------------------\r\n");
+            sb.AppendFormat("TAMAÑO : {0}", p.Tamanio);
 
             return sb.ToString();
         }
 
         /// <summary>
-        /// Dos vehiculos son iguales si comparten el mismo chasis
+        /// Sobrecarga del operador ==. Dos vehiculos son iguales si comparten el mismo chasis
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -74,7 +85,7 @@ namespace Entidades
             return false;
         }
         /// <summary>
-        /// Dos vehiculos son distintos si su chasis es distinto
+        /// Soberecarga del operador !=. Dos vehiculos son distintos si su chasis es distinto
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>

@@ -13,7 +13,7 @@ namespace Entidades
         {
         }
         /// <summary>
-        /// SUV son 'Grande'
+        /// Propiedad que devuelve el tamanio. SUV son 'Grande'
         /// </summary>
         protected override ETamanio Tamanio
         {
@@ -23,14 +23,16 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Sobreescribe el metodo y utiliza StringBuilder para mostrar todos los datos de la clase invocando al metodo de la clase base 
+        /// </summary>
+        /// <returns></returns>
         public override sealed string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SUV");
             sb.AppendLine(base.Mostrar());
-            sb.AppendFormat("TAMAÑO : {0}", this.Tamanio);
-            sb.AppendLine("");
             sb.AppendLine("---------------------");
 
             return sb.ToString();
