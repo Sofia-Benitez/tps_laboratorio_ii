@@ -10,9 +10,9 @@ namespace Entidades
     {
         private double numero;
 
-        public Operando()
+        public Operando():this(0)
         {
-            this.numero = 0;
+            
         }
 
         private string Numero
@@ -33,6 +33,7 @@ namespace Entidades
             this.numero = numero;
         }
 
+
         /// <summary>
         /// Parsea un string y si es una cadena de numeros devuelve el numero en double, si no lo es devuelve 0
         /// </summary>
@@ -50,7 +51,9 @@ namespace Entidades
             return numero;
         }
 
+
         //sobrecarga de operadores
+
 
         /// <summary>
         /// sobrecarga del operador - para restar los atributos numero de objetos del tipo Operando
@@ -63,6 +66,7 @@ namespace Entidades
             return n1.numero - n2.numero;
         }
 
+
         /// <summary>
         /// sobrecarga del operador + para sumar los atributos numero de objetos del tipo Operando
         /// </summary>
@@ -73,6 +77,7 @@ namespace Entidades
         {
             return n1.numero + n2.numero;
         }
+
 
         /// <summary>
         /// sobrecarga del operador / para dividir los atributos numero de objetos del tipo Operando, 
@@ -89,6 +94,7 @@ namespace Entidades
             }
             return n1.numero / n2.numero;
         }
+
 
         /// <summary>
         /// sobrecarga del operador * para multiplicar los atributos numero de objetos del tipo Operando
@@ -121,6 +127,7 @@ namespace Entidades
             return true;
         }
 
+
         /// <summary>
         /// valida si la cadena es un numero binario,  y si lo es lo convierte a entero para convertirlo a decimal
         /// </summary>
@@ -139,6 +146,7 @@ namespace Entidades
             
             return "Valor invalido";
         }
+
 
         /// <summary>
         /// convierte un numero decimal double a binario y lo devuelve como string
