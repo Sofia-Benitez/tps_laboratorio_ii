@@ -7,14 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
 
 namespace AplicacionIMDb
 {
     public partial class FrmPrincipal : Form
     {
+        IMDb imdb = new IMDb();
+
+        
+
         public FrmPrincipal()
         {
             InitializeComponent();
+            
+            
+        }
+
+        private void btnPeliculas_Click(object sender, EventArgs e)
+        {
+            FrmLista frmLista = new FrmLista("Películas", imdb);
+            frmLista.ShowDialog();
         }
 
         

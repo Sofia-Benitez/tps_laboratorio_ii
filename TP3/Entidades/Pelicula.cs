@@ -38,17 +38,6 @@ namespace Entidades
             return sb.ToString();
         }
 
-        public static void CargarPelicula()
-        {
-
-            Equipo equipoTitane = new Equipo("Julia Ducournau", "Julia Ducournau");
-            List<string> actoresTitane = new List<string>
-            {
-                "Agathe Rousselle", "Vincent Lindon", "Garance Marillier"
-            };
-            Pelicula titane = new Pelicula("Titane", 2021, 6.9F, "Horror", equipoTitane, 108);
-            titane.Id = 1;
-        }
 
         public static bool operator ==(Pelicula pelicula1, Pelicula pelicula2)
         {

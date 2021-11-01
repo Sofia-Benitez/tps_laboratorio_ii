@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0-windows7.0": {}
+    "net5.0-windows7.0": {
+      "Entidades/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Entidades.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entidades.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Entidades/1.0.0": {
+      "type": "project",
+      "path": "../Entidades/Entidades.csproj",
+      "msbuildProject": "../Entidades/Entidades.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0-windows7.0": []
+    "net5.0-windows7.0": [
+      "Entidades >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\sofia\\.nuget\\packages\\": {}
@@ -13,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\Benitez.Sofia.2D.TPFinal\\AplicacionIMDb\\AplicacionIMDb.csproj",
+      "projectUniqueName": "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\AplicacionIMDb\\AplicacionIMDb.csproj",
       "projectName": "AplicacionIMDb",
-      "projectPath": "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\Benitez.Sofia.2D.TPFinal\\AplicacionIMDb\\AplicacionIMDb.csproj",
+      "projectPath": "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\AplicacionIMDb\\AplicacionIMDb.csproj",
       "packagesPath": "C:\\Users\\sofia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\Benitez.Sofia.2D.TPFinal\\AplicacionIMDb\\obj\\",
+      "outputPath": "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\AplicacionIMDb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sofia\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -33,7 +52,11 @@
       "frameworks": {
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\Entidades\\Entidades.csproj": {
+              "projectPath": "C:\\Users\\sofia\\Desktop\\UTN\\Laboratorio-Programacion2\\tps_laboratorio_ii\\TP3\\Entidades\\Entidades.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

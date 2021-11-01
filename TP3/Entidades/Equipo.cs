@@ -67,19 +67,24 @@ namespace Entidades
         public string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Director/a: {this.director}");
-            sb.AppendLine($"Escritor/a: {this.escritor}");
+            sb.AppendLine($"Director/a: {this.director} ");
+            sb.AppendLine($"Escritor/a: {this.escritor} ");
             sb.AppendLine("Actores y actrices: ");
             foreach (string actor in actores)
             {
-                sb.AppendLine(actor);
+                sb.AppendLine(actor + " ");
             }
 
             return sb.ToString();
         }
 
-        
+        public override string ToString()
+        {
+            return this.Mostrar();
+        }
 
-        
+
+
+
     }
 }
