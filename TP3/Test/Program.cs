@@ -24,12 +24,12 @@ namespace Test
             equipoMidsommar.Actores.Add("Jack Reynor");
 
             Pelicula midsommar = new Pelicula("Midsommar", 2019, 7.1F, "Horror", equipoMidsommar, 148);
-            imdb.AgregarPelicula(midsommar);
-            imdb.AgregarPelicula(titane);
+            imdb.AgregarContenido(midsommar);
+            imdb.AgregarContenido(titane);
 
             Equipo pelieq = new Equipo("lala", "pepe", new List<string> { "lala", "kksads", "djjf" });
             Pelicula peli = new Pelicula("dsds", 111, 2F, "terror", pelieq, 122);
-            imdb.AgregarPelicula(peli);
+            imdb.AgregarContenido(peli);
 
 
             Console.WriteLine("Lista de peliculas");

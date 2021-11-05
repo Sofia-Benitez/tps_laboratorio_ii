@@ -79,6 +79,7 @@ namespace AplicacionIMDb
             this.btnSeries.TabIndex = 2;
             this.btnSeries.Text = "Series";
             this.btnSeries.UseVisualStyleBackColor = false;
+            this.btnSeries.Click += new System.EventHandler(this.btnSeries_Click);
             // 
             // pictureBox1
             // 

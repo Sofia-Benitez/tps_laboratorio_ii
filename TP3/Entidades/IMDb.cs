@@ -29,7 +29,19 @@ namespace Entidades
             }
         }
 
-        public bool AgregarPelicula(Pelicula nuevaPelicula)
+        public List<Serie> Series
+        {
+            get
+            {
+                return this.series;
+            }
+            set
+            {
+                this.series = value;
+            }
+        }
+
+        public bool AgregarContenido(Pelicula nuevaPelicula)
         {
             int nuevoID;
             
@@ -56,5 +68,37 @@ namespace Entidades
             return true;
 
         }
+
+        public bool AgregarContenido(Serie nuevaSerie)
+        {
+            int nuevoID;
+
+
+            foreach (Serie item in series)
+            {
+                if (nuevaSerie == item)
+                {
+                    return false;
+                }
+            }
+
+            if (series.Count == 0)
+            {
+                nuevoID = 1;
+            }
+            else
+            {
+                nuevoID = series[series.Count - 1].Id + 1;
+            }
+
+            nuevaSerie.Id = nuevoID;
+            this.series.Add(nuevaSerie);
+            return true;
+
+        }
     }
+    
+
+   
 }
+

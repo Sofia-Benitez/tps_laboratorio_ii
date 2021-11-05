@@ -66,18 +66,18 @@ namespace Entidades
             return sb.ToString();
         }
 
-        //public static void CargarSeries()
-        //{
-            
-        //    Equipo equipoTedLasso = new Equipo("Declan Lowney", "Brendan Hunt");
-        //    equipoTedLasso.actores.Add("Jason Sudeikis");
-        //    equipoTedLasso.actores.Add("Brett Goldstein");
-        //    equipoTedLasso.actores.Add("Brendan Hunt");
-        //    equipoTedLasso.actores.Add("Hannah Waddingham");
-        //    equipoTedLasso.actores.Add("Jason Sudeikis");
-        //    Serie tedLasso = new Serie("Ted Lasso", 2020, 8.8F, "Comedy", equipoTedLasso, 2);
-        //    tedLasso.Id = 1;
-            
-        //}
+        public static bool operator ==(Serie serie1, Serie serie2)
+        {
+            if (serie1.titulo == serie2.titulo && serie1.añoLanzamiento == serie2.añoLanzamiento)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator !=(Serie serie1, Serie serie2)
+        {
+            return !(serie1 == serie2);
+        }
     }
 }

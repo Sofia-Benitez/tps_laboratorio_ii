@@ -6,7 +6,6 @@ C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\Apli
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\bin\Debug\net5.0-windows\ref\AplicacionIMDb.dll
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\bin\Debug\net5.0-windows\AplicacionIMDb.pdb
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\obj\Debug\net5.0-windows\AplicacionIMDb.FrmAltayModificacion.resources
-C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\obj\Debug\net5.0-windows\AplicacionIMDb.FrmLista.resources
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\obj\Debug\net5.0-windows\AplicacionIMDb.FrmPrincipal.resources
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\obj\Debug\net5.0-windows\AplicacionIMDb.Properties.Resources.resources
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\obj\Debug\net5.0-windows\AplicacionIMDb.csproj.GenerateResource.cache
@@ -22,3 +21,4 @@ C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\Apli
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\bin\Debug\net5.0-windows\Entidades.dll
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\bin\Debug\net5.0-windows\Entidades.pdb
 C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\obj\Debug\net5.0-windows\AplicacionIMDb.csproj.CopyComplete
+C:\Users\sofia\Desktop\UTN\Laboratorio-Programacion2\tps_laboratorio_ii\TP3\AplicacionIMDb\obj\Debug\net5.0-windows\AplicacionIMDb.FrmLista.resources

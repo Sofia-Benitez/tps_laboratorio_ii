@@ -15,13 +15,18 @@ namespace AplicacionIMDb
     {
         public Pelicula nuevaPelicula;
         public Pelicula peliculaModificar;
-        public FrmAltayModificacion(string titulo, string tipo, string textoConfirmar, Pelicula peliculaAModificar)
+        public Serie serieModificar;
+
+        public Serie nuevaSerie;
+        public FrmAltayModificacion(string titulo, string tipo, string textoConfirmar, ContenidoAudiovisual contenidoModificar)
         {
             InitializeComponent();
             this.Text = titulo;
             lblTipoContenido.Text = tipo;
             btnConfirmar.Text = textoConfirmar;
-            peliculaModificar = peliculaAModificar;
+            peliculaModificar = contenidoModificar as Pelicula;
+            serieModificar = contenidoModificar as Serie;
+           
         }
 
         private void FrmAltayModificacion_Load(object sender, EventArgs e)
@@ -29,7 +34,9 @@ namespace AplicacionIMDb
             if(lblTipoContenido.Text == "Película")
             {
                 txtAñoFinalizacion.Hide();
+                lblAñofin.Hide();
                 txtTemporadas.Hide();
+                lblTempODuracion.Text = "Duración";
                 if(peliculaModificar is not null)
                 {
                     txtDirector.Text = peliculaModificar.Equipo.Director;
@@ -47,24 +54,46 @@ namespace AplicacionIMDb
             else
             {
                 txtDuracion.Hide();
+                lblTempODuracion.Text = "Temporadas";
+                if (serieModificar is not null)
+                {
+                    txtDirector.Text = serieModificar.Equipo.Director;
+                    txtEscritor.Text = serieModificar.Equipo.Escritor;
+                    txtActor1.Text = serieModificar.Equipo.Actores[0];
+                    txtActor2.Text = serieModificar.Equipo.Actores[1];
+                    txtActor3.Text = serieModificar.Equipo.Actores[2];
+                    txtTitulo.Text = serieModificar.Titulo;
+                    txtAño.Text = serieModificar.AñoDeLanzamiento.ToString();
+                    txtAñoFinalizacion.Text = serieModificar.AñoDeFinalizacion.ToString();
+                    txtTemporadas.Text = serieModificar.CantidadDeTemporadas.ToString();
+                    cbxGenero.Text = serieModificar.Genero;
+                    txtPuntuacion.Text = serieModificar.Puntuacion.ToString();
+                }
             }
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            if(peliculaModificar is null)
+            if(lblTipoContenido.Text == "Película")
             {
-                if (lblTipoContenido.Text == "Película")
+                if(peliculaModificar is null)
                 {
                     AgregarPelicula();
+                }
+                else
+                {
+                    ModificarPelicula();
                 }
             }
             else
             {
-                if (lblTipoContenido.Text == "Película")
+                if(serieModificar is null)
                 {
-                    ModificarPelicula();
-                    
+                    AgregarSerie();
+                }
+                else
+                {
+                    ModificarSerie();
                 }
                 
             }
@@ -125,7 +154,7 @@ namespace AplicacionIMDb
                string.IsNullOrWhiteSpace(actor2) || string.IsNullOrWhiteSpace(actor3) || string.IsNullOrWhiteSpace(titulo) || string.IsNullOrWhiteSpace(año) || string.IsNullOrWhiteSpace(genero) ||
                string.IsNullOrWhiteSpace(duracion) || string.IsNullOrWhiteSpace(puntuacion))
             {
-                MessageBox.Show("Error. Todos los campos deben estar completos para agregar un nuevo elemento");
+                MessageBox.Show("Error. Todos los campos deben estar completos para modificar un elemento");
             }
             else
             {
@@ -147,5 +176,88 @@ namespace AplicacionIMDb
                 }
             }
         }
+
+        private void AgregarSerie()
+        {
+            string director = txtDirector.Text;
+            string escritor = txtEscritor.Text;
+            string actor1 = txtActor1.Text;
+            string actor2 = txtActor2.Text;
+            string actor3 = txtActor3.Text;
+            string titulo = txtTitulo.Text;
+            string año = txtAño.Text;
+            string añoFin = txtAñoFinalizacion.Text;
+            string puntuacion = txtPuntuacion.Text;
+            string genero = cbxGenero.Text;
+            string temporadas = txtTemporadas.Text;
+            
+
+            if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
+               string.IsNullOrWhiteSpace(actor2) || string.IsNullOrWhiteSpace(actor3) || string.IsNullOrWhiteSpace(titulo) || string.IsNullOrWhiteSpace(año) || string.IsNullOrWhiteSpace(genero) ||
+               string.IsNullOrWhiteSpace(puntuacion) || string.IsNullOrWhiteSpace(temporadas))
+            {
+                MessageBox.Show("Error. Todos los campos deben estar completos para agregar un nuevo elemento");
+            }
+            else
+            {
+                Equipo equipoAgregar = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
+                if(string.IsNullOrWhiteSpace(añoFin))
+                {
+                    nuevaSerie = new Serie(titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, int.Parse(temporadas));
+                }
+                else
+                {
+                    nuevaSerie = new Serie(titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, int.Parse(temporadas), int.Parse(añoFin));
+                }
+                if (nuevaSerie is not null)
+                {
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+        }
+
+        private void ModificarSerie()
+        {
+            string director = txtDirector.Text;
+            string escritor = txtEscritor.Text;
+            string actor1 = txtActor1.Text;
+            string actor2 = txtActor2.Text;
+            string actor3 = txtActor3.Text;
+            string titulo = txtTitulo.Text;
+            string año = txtAño.Text;
+            string añoFin = txtAñoFinalizacion.Text;
+            string puntuacion = txtPuntuacion.Text;
+            string genero = cbxGenero.Text;
+            string temporadas = txtTemporadas.Text;
+
+            if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
+               string.IsNullOrWhiteSpace(actor2) || string.IsNullOrWhiteSpace(actor3) || string.IsNullOrWhiteSpace(titulo) || string.IsNullOrWhiteSpace(año) || string.IsNullOrWhiteSpace(genero) ||
+               string.IsNullOrWhiteSpace(temporadas) || string.IsNullOrWhiteSpace(puntuacion))
+            {
+                MessageBox.Show("Error. Todos los campos deben estar completos para modificar el elemento");
+            }
+            else
+            {
+                serieModificar.Equipo.Director = director;
+                serieModificar.Equipo.Escritor = escritor;
+                serieModificar.Equipo.Actores[0] = actor1;
+                serieModificar.Equipo.Actores[1] = actor2;
+                serieModificar.Equipo.Actores[2] = actor3;
+                serieModificar.Titulo = titulo;
+                serieModificar.AñoDeLanzamiento = int.Parse(año);
+                serieModificar.AñoDeFinalizacion = int.Parse(añoFin);
+                serieModificar.CantidadDeTemporadas = int.Parse(temporadas);
+                serieModificar.Genero = genero;
+                serieModificar.Puntuacion = float.Parse(puntuacion);
+                if (serieModificar is not null)
+                {
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+        }
+
+
     }
 }

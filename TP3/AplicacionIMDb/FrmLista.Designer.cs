@@ -67,6 +67,7 @@ namespace AplicacionIMDb
             this.dataGridLista.Name = "dataGridLista";
             this.dataGridLista.ReadOnly = true;
             this.dataGridLista.RowTemplate.Height = 25;
+            this.dataGridLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridLista.Size = new System.Drawing.Size(900, 464);
             this.dataGridLista.TabIndex = 0;
             // 
@@ -215,7 +216,7 @@ namespace AplicacionIMDb
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // FrmLista
+            // FrmListaPeliculas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

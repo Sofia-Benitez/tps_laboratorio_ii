@@ -15,7 +15,7 @@ namespace AplicacionIMDb
     public partial class FrmLista : Form
     {
         IMDb baseDeDatosSeriesYPeliculas;
-        
+
         public FrmLista(string tipo, IMDb imdb)
         {
             InitializeComponent();
@@ -25,65 +25,70 @@ namespace AplicacionIMDb
         }
 
 
-        
+
         private void FrmLista_Load(object sender, EventArgs e)
         {
-            Equipo equipoTitane = new Equipo("Julia Ducournau", "Julia Ducournau");
-            Pelicula titane = new Pelicula("Titane", 2021, 6.9F, "Horror", equipoTitane, 120);
-
-            Equipo equipoMidsommar = new Equipo("Ari Aster", "Ari Aster");
-
-            Pelicula midsommar = new Pelicula("Midsommar", 2019, 7.1F, "Horror", equipoMidsommar, 148);
+            if(this.Text == "Películas")
+            {
+                ActualizarDataSourcePeliculas();
+            }
+            else
+            {
+                ActualizarDataSourceSeries();
+            }
 
             
-            equipoTitane.Actores.Add("Agathe Rousselle");
-            equipoTitane.Actores.Add("Vincent Lindon");
-            equipoTitane.Actores.Add("Garance Marillier");
-
-            equipoMidsommar.Actores.Add("Florence Pugh");
-            equipoMidsommar.Actores.Add("Vilhelm Blomgren");
-            equipoMidsommar.Actores.Add("Jack Reynor");
-
-           
-            baseDeDatosSeriesYPeliculas.AgregarPelicula(midsommar);
-            baseDeDatosSeriesYPeliculas.AgregarPelicula(titane);
-
-
-            ActualizarDataSourcePeliculas();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-
-
-            FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Agregar película", "Película", "Agregar", null);
-
-            frmAltaModificacion.ShowDialog();
-
-            if (frmAltaModificacion.DialogResult == DialogResult.OK)
+            if(this.Text == "Películas")
             {
-                baseDeDatosSeriesYPeliculas.AgregarPelicula(frmAltaModificacion.nuevaPelicula);
-                ActualizarDataSourcePeliculas();
+                FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Agregar película", "Película", "Agregar", null);
+
+                frmAltaModificacion.ShowDialog();
+
+                if (frmAltaModificacion.DialogResult == DialogResult.OK)
+                {
+                    baseDeDatosSeriesYPeliculas.AgregarContenido(frmAltaModificacion.nuevaPelicula);
+                    ActualizarDataSourcePeliculas();
+                }
+            }
+            else
+            {
+                FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Agregar serie", "Series", "Agregar", null);
+
+                frmAltaModificacion.ShowDialog();
+
+                if (frmAltaModificacion.DialogResult == DialogResult.OK)
+                {
+                    baseDeDatosSeriesYPeliculas.AgregarContenido(frmAltaModificacion.nuevaSerie);
+                    ActualizarDataSourceSeries();
+                }
             }
 
-
         }
 
 
-        private void ActualizarDataSourcePeliculas()
-        {
-            dataGridLista.DataSource = null;
-            dataGridLista.DataSource = baseDeDatosSeriesYPeliculas.Peliculas;
-        }
+        
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dataGridLista.SelectedRows.Count > 0)
             {
-                Pelicula pelicula = dataGridLista.SelectedRows[0].DataBoundItem as Pelicula;
-                baseDeDatosSeriesYPeliculas.Peliculas.Remove(pelicula);
-                ActualizarDataSourcePeliculas();
-                
+                if (this.Text == "Películas")
+                {
+                    Pelicula pelicula = dataGridLista.SelectedRows[0].DataBoundItem as Pelicula;
+                    baseDeDatosSeriesYPeliculas.Peliculas.Remove(pelicula);
+                    ActualizarDataSourcePeliculas();
+                }
+                else
+                {
+                    Serie serie = dataGridLista.SelectedRows[0].DataBoundItem as Serie;
+                    baseDeDatosSeriesYPeliculas.Series.Remove(serie);
+                    ActualizarDataSourceSeries();
+                }
+                    
             }
             else
             {
@@ -93,25 +98,53 @@ namespace AplicacionIMDb
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if(dataGridLista.SelectedRows.Count > 0)
+            if (dataGridLista.SelectedRows.Count > 0)
             {
-                Pelicula pelicula = dataGridLista.SelectedRows[0].DataBoundItem as Pelicula;
-                FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Modificar película", "Película", "Modificar", pelicula);
-
-                frmAltaModificacion.ShowDialog();
-
-                if (frmAltaModificacion.DialogResult == DialogResult.OK)
+                if (this.Text == "Películas")
                 {
-                    pelicula = frmAltaModificacion.peliculaModificar;
-                    ActualizarDataSourcePeliculas();
+                    Pelicula pelicula = dataGridLista.SelectedRows[0].DataBoundItem as Pelicula;
+                    FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Modificar película", "Película", "Modificar", pelicula);
+
+                    frmAltaModificacion.ShowDialog();
+
+                    if (frmAltaModificacion.DialogResult == DialogResult.OK)
+                    {
+                        pelicula = frmAltaModificacion.peliculaModificar;
+                        ActualizarDataSourcePeliculas();
+                    }
                 }
+                else
+                {
+                    Serie serie = dataGridLista.SelectedRows[0].DataBoundItem as Serie;
+                    FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Modificar serie", "Serie", "Modificar", serie);
+
+                    frmAltaModificacion.ShowDialog();
+
+                    if (frmAltaModificacion.DialogResult == DialogResult.OK)
+                    {
+                        serie = frmAltaModificacion.serieModificar;
+                        ActualizarDataSourceSeries();
+                    }
+                }
+                    
             }
             else
             {
                 MessageBox.Show("Debe seleccionar un elemento de la lista");
             }
-            
+
         }
 
+        private void ActualizarDataSourcePeliculas()
+        {
+            dataGridLista.DataSource = null;
+            dataGridLista.DataSource = baseDeDatosSeriesYPeliculas.Peliculas;
+        }
+
+        private void ActualizarDataSourceSeries()
+        {
+            dataGridLista.DataSource = null;
+            dataGridLista.DataSource = baseDeDatosSeriesYPeliculas.Series;
+        }
     }
 }
