@@ -13,16 +13,10 @@ namespace Entidades
         private List<string> actores;
 
         
-
-        public Equipo(string director, string escritor)
+        public Equipo(string director, string escritor, List<string> actores)
         {
             this.director = director;
             this.escritor = escritor;
-            this.actores= new List<string>();
-        }
-
-        public Equipo(string director, string escritor, List<string> actores):this(director, escritor)
-        {
             this.actores = actores;
         }
 

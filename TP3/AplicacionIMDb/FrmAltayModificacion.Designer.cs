@@ -83,6 +83,16 @@ namespace AplicacionIMDb
             // cbxGenero
             // 
             this.cbxGenero.FormattingEnabled = true;
+            this.cbxGenero.Items.AddRange(new object[] {
+            "Comedia",
+            "Drama",
+            "Terror",
+            "Thriller",
+            "Comedia romántica",
+            "Aventura",
+            "Crimen",
+            "Misterio",
+            "Fantástico"});
             this.cbxGenero.Location = new System.Drawing.Point(214, 97);
             this.cbxGenero.Name = "cbxGenero";
             this.cbxGenero.Size = new System.Drawing.Size(165, 23);
@@ -90,10 +100,10 @@ namespace AplicacionIMDb
             // 
             // txtPuntuacion
             // 
-            this.txtPuntuacion.Location = new System.Drawing.Point(263, 206);
+            this.txtPuntuacion.Location = new System.Drawing.Point(242, 206);
             this.txtPuntuacion.Name = "txtPuntuacion";
             this.txtPuntuacion.PlaceholderText = "Puntuación";
-            this.txtPuntuacion.Size = new System.Drawing.Size(116, 23);
+            this.txtPuntuacion.Size = new System.Drawing.Size(137, 23);
             this.txtPuntuacion.TabIndex = 6;
             // 
             // txtDuracion
@@ -101,7 +111,7 @@ namespace AplicacionIMDb
             this.txtDuracion.Location = new System.Drawing.Point(90, 206);
             this.txtDuracion.Name = "txtDuracion";
             this.txtDuracion.PlaceholderText = "Duración en minutos";
-            this.txtDuracion.Size = new System.Drawing.Size(162, 23);
+            this.txtDuracion.Size = new System.Drawing.Size(137, 23);
             this.txtDuracion.TabIndex = 7;
             // 
             // lblEquipo
@@ -158,7 +168,7 @@ namespace AplicacionIMDb
             this.txtTemporadas.Location = new System.Drawing.Point(90, 206);
             this.txtTemporadas.Name = "txtTemporadas";
             this.txtTemporadas.PlaceholderText = "Temporadas";
-            this.txtTemporadas.Size = new System.Drawing.Size(162, 23);
+            this.txtTemporadas.Size = new System.Drawing.Size(137, 23);
             this.txtTemporadas.TabIndex = 14;
             // 
             // txtAñoFinalizacion
@@ -245,7 +255,7 @@ namespace AplicacionIMDb
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(263, 188);
+            this.label5.Location = new System.Drawing.Point(242, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 15);
             this.label5.TabIndex = 23;

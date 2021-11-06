@@ -15,6 +15,7 @@ namespace AplicacionIMDb
     public partial class FrmLista : Form
     {
         IMDb baseDeDatosSeriesYPeliculas;
+        List<Serie> seriesSinFinalizar = new List<Serie>();
 
         public FrmLista(string tipo, IMDb imdb)
         {
@@ -28,21 +29,23 @@ namespace AplicacionIMDb
 
         private void FrmLista_Load(object sender, EventArgs e)
         {
-            if(this.Text == "Películas")
+            if (this.Text == "Películas")
             {
                 ActualizarDataSourcePeliculas();
+                btnEstadistica1.Text = "";
             }
             else
             {
                 ActualizarDataSourceSeries();
+                btnEstadistica1.Text = "Series no finalizadas";
             }
 
-            
+
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(this.Text == "Películas")
+            if (this.Text == "Películas")
             {
                 FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Agregar película", "Película", "Agregar", null);
 
@@ -70,7 +73,7 @@ namespace AplicacionIMDb
         }
 
 
-        
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -88,7 +91,7 @@ namespace AplicacionIMDb
                     baseDeDatosSeriesYPeliculas.Series.Remove(serie);
                     ActualizarDataSourceSeries();
                 }
-                    
+
             }
             else
             {
@@ -126,7 +129,7 @@ namespace AplicacionIMDb
                         ActualizarDataSourceSeries();
                     }
                 }
-                    
+
             }
             else
             {
@@ -145,6 +148,39 @@ namespace AplicacionIMDb
         {
             dataGridLista.DataSource = null;
             dataGridLista.DataSource = baseDeDatosSeriesYPeliculas.Series;
+        }
+
+        //ESTADISTICAS
+       
+        public int SeriesSinFinalizar()
+        {
+            int contadorSeries = 0;
+            foreach (Serie item in baseDeDatosSeriesYPeliculas.Series)
+            {
+                if(item.AñoFinalizacion==0 && !(this.seriesSinFinalizar.Contains(item)))
+                {
+                    this.seriesSinFinalizar.Add(item);
+                    contadorSeries++;
+                }
+            }
+
+            return contadorSeries;
+        }
+
+        private void btnEstadistica1_Click(object sender, EventArgs e)
+        {
+            dataGridLista.DataSource = null;
+            if (this.Text == "Películas")
+            {
+
+            }
+            else
+            {
+                int resultado = SeriesSinFinalizar();
+                dataGridLista.DataSource = null;
+                dataGridLista.DataSource = this.seriesSinFinalizar;
+                lblResultado.Text = $"Cantidad de series que no han finalizado: {resultado.ToString()}";
+            }
         }
     }
 }

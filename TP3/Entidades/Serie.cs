@@ -11,7 +11,16 @@ namespace Entidades
         private int temporadas;
         private int añoFinalizacion;
 
-        public int CantidadDeTemporadas
+        public Serie(int id, string titulo, int añoLanzamiento, float puntuacion, string genero, Equipo equipo, int temporadas, int añoFinalizacion)
+            : base(id, titulo, añoLanzamiento, puntuacion, genero, equipo)
+        {
+            this.temporadas = temporadas;
+            this.añoFinalizacion = añoFinalizacion;
+        }
+
+       
+
+        public int Temporadas
         {
             get
             {
@@ -23,7 +32,7 @@ namespace Entidades
             }
         }
 
-        public int AñoDeFinalizacion
+        public int AñoFinalizacion
         {
             get
             {
@@ -35,29 +44,19 @@ namespace Entidades
             }
         }
 
-        public Serie(string titulo, int año, float puntuacion, string genero, Equipo equipo, int temporadas)
-            : base(titulo, año, puntuacion, genero, equipo)
-        {
-            this.temporadas = temporadas;
-        }
-
-        public Serie(string titulo, int año, float puntuacion, string genero, Equipo equipo, int temporadas, int añoFinalizacion) 
-            : this(titulo, año, puntuacion, genero, equipo, temporadas)
-        {
-            this.añoFinalizacion = añoFinalizacion;
-        }
+        
 
         public override string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Titulo: {this.Titulo}");
             sb.AppendLine("Serie de TV");
-            sb.AppendLine($"{this.AñoDeLanzamiento}-");
+            sb.AppendLine($"{this.AñoLanzamiento}-");
             if(añoFinalizacion!=0)
             {
-                sb.Append($"{this.AñoDeFinalizacion} ");
+                sb.Append($"{this.AñoFinalizacion} ");
             }
-            sb.AppendLine($"Temporadas emitidas: {this.CantidadDeTemporadas}");
+            sb.AppendLine($"Temporadas emitidas: {this.Temporadas}");
             sb.AppendLine($"Género: {this.Genero}");
             sb.AppendLine($"Puntuación: {this.Puntuacion}");
             sb.AppendLine(this.equipo.Mostrar());
@@ -78,6 +77,18 @@ namespace Entidades
         public static bool operator !=(Serie serie1, Serie serie2)
         {
             return !(serie1 == serie2);
+        }
+
+        public override bool Equals(object obj)
+        {
+            Serie serie = obj as Serie;
+
+            return serie is not null && this == serie;
+        }
+
+        public override int GetHashCode()
+        {
+            return (titulo, añoLanzamiento).GetHashCode();
         }
     }
 }

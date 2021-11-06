@@ -45,8 +45,8 @@ namespace AplicacionIMDb
                     txtActor2.Text= peliculaModificar.Equipo.Actores[1]; 
                     txtActor3.Text = peliculaModificar.Equipo.Actores[2];
                     txtTitulo.Text = peliculaModificar.Titulo;
-                    txtAño.Text =peliculaModificar.AñoDeLanzamiento.ToString();
-                    txtDuracion.Text = peliculaModificar.DuracionEnMinutos.ToString(); 
+                    txtAño.Text =peliculaModificar.AñoLanzamiento.ToString();
+                    txtDuracion.Text = peliculaModificar.Duracion.ToString(); 
                     cbxGenero.Text = peliculaModificar.Genero;
                     txtPuntuacion.Text = peliculaModificar.Puntuacion.ToString();
                 }
@@ -63,9 +63,9 @@ namespace AplicacionIMDb
                     txtActor2.Text = serieModificar.Equipo.Actores[1];
                     txtActor3.Text = serieModificar.Equipo.Actores[2];
                     txtTitulo.Text = serieModificar.Titulo;
-                    txtAño.Text = serieModificar.AñoDeLanzamiento.ToString();
-                    txtAñoFinalizacion.Text = serieModificar.AñoDeFinalizacion.ToString();
-                    txtTemporadas.Text = serieModificar.CantidadDeTemporadas.ToString();
+                    txtAño.Text = serieModificar.AñoLanzamiento.ToString();
+                    txtAñoFinalizacion.Text = serieModificar.AñoFinalizacion.ToString();
+                    txtTemporadas.Text = serieModificar.Temporadas.ToString();
                     cbxGenero.Text = serieModificar.Genero;
                     txtPuntuacion.Text = serieModificar.Puntuacion.ToString();
                 }
@@ -128,7 +128,7 @@ namespace AplicacionIMDb
             else
             {
                 Equipo equipoAgregar = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
-                nuevaPelicula = new Pelicula(titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, double.Parse(duracion));
+                nuevaPelicula = new Pelicula(0, titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, double.Parse(duracion));
                 if (nuevaPelicula is not null)
                 {
                     DialogResult = DialogResult.OK;
@@ -165,8 +165,8 @@ namespace AplicacionIMDb
                 peliculaModificar.Equipo.Actores[1] = actor2;
                 peliculaModificar.Equipo.Actores[2] = actor3;
                 peliculaModificar.Titulo = titulo;
-                peliculaModificar.AñoDeLanzamiento = int.Parse(año);
-                peliculaModificar.DuracionEnMinutos = double.Parse(duracion);
+                peliculaModificar.AñoLanzamiento = int.Parse(año);
+                peliculaModificar.Duracion = double.Parse(duracion);
                 peliculaModificar.Genero = genero;
                 peliculaModificar.Puntuacion = float.Parse(puntuacion);
                 if (peliculaModificar is not null)
@@ -201,14 +201,9 @@ namespace AplicacionIMDb
             else
             {
                 Equipo equipoAgregar = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
-                if(string.IsNullOrWhiteSpace(añoFin))
-                {
-                    nuevaSerie = new Serie(titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, int.Parse(temporadas));
-                }
-                else
-                {
-                    nuevaSerie = new Serie(titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, int.Parse(temporadas), int.Parse(añoFin));
-                }
+                
+                nuevaSerie = new Serie(0, titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, int.Parse(temporadas), int.Parse(añoFin));
+                
                 if (nuevaSerie is not null)
                 {
                     DialogResult = DialogResult.OK;
@@ -245,9 +240,9 @@ namespace AplicacionIMDb
                 serieModificar.Equipo.Actores[1] = actor2;
                 serieModificar.Equipo.Actores[2] = actor3;
                 serieModificar.Titulo = titulo;
-                serieModificar.AñoDeLanzamiento = int.Parse(año);
-                serieModificar.AñoDeFinalizacion = int.Parse(añoFin);
-                serieModificar.CantidadDeTemporadas = int.Parse(temporadas);
+                serieModificar.AñoLanzamiento = int.Parse(año);
+                serieModificar.AñoFinalizacion = int.Parse(añoFin);
+                serieModificar.Temporadas = int.Parse(temporadas);
                 serieModificar.Genero = genero;
                 serieModificar.Puntuacion = float.Parse(puntuacion);
                 if (serieModificar is not null)

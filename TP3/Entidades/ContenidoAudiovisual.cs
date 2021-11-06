@@ -15,11 +15,11 @@ namespace Entidades
         protected string genero;
         protected Equipo equipo;
 
-        public ContenidoAudiovisual(string titulo, int año, float puntuacion, string genero, Equipo equipo)
+        protected ContenidoAudiovisual(int id, string titulo, int añoLanzamiento, float puntuacion, string genero, Equipo equipo)
         {
-            this.id = 0;
+            this.id=id;
             this.titulo = titulo;
-            this.añoLanzamiento = año;
+            this.añoLanzamiento = añoLanzamiento;
             this.puntuacion = puntuacion;
             this.genero = genero;
             this.equipo = equipo;
@@ -48,7 +48,7 @@ namespace Entidades
             }
         }
 
-        public int AñoDeLanzamiento
+        public int AñoLanzamiento
         {
             get
             {

@@ -40,6 +40,15 @@ namespace AplicacionIMDb
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaPelículasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaSeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarPelículasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarSeriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarComoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarComoPelículasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarComoSeriesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblConfirmacionArchivos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -137,7 +146,9 @@ namespace AplicacionIMDb
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
+            this.archivoToolStripMenuItem,
+            this.guardarToolStripMenuItem1,
+            this.guardarComoToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(823, 24);
@@ -146,10 +157,84 @@ namespace AplicacionIMDb
             // 
             // archivoToolStripMenuItem
             // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listaPelículasToolStripMenuItem,
+            this.listaSeriesToolStripMenuItem});
             this.archivoToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.archivoToolStripMenuItem.Text = "Archivo";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.archivoToolStripMenuItem.Text = "Abrir";
+            // 
+            // listaPelículasToolStripMenuItem
+            // 
+            this.listaPelículasToolStripMenuItem.Name = "listaPelículasToolStripMenuItem";
+            this.listaPelículasToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.listaPelículasToolStripMenuItem.Text = "Lista películas";
+            this.listaPelículasToolStripMenuItem.Click += new System.EventHandler(this.listaPelículasToolStripMenuItem_Click);
+            // 
+            // listaSeriesToolStripMenuItem
+            // 
+            this.listaSeriesToolStripMenuItem.Name = "listaSeriesToolStripMenuItem";
+            this.listaSeriesToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.listaSeriesToolStripMenuItem.Text = "Lista series";
+            this.listaSeriesToolStripMenuItem.Click += new System.EventHandler(this.listaSeriesToolStripMenuItem_Click);
+            // 
+            // guardarToolStripMenuItem1
+            // 
+            this.guardarToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.guardarPelículasToolStripMenuItem,
+            this.guardarSeriesToolStripMenuItem});
+            this.guardarToolStripMenuItem1.Name = "guardarToolStripMenuItem1";
+            this.guardarToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
+            this.guardarToolStripMenuItem1.Text = "Guardar";
+            // 
+            // guardarPelículasToolStripMenuItem
+            // 
+            this.guardarPelículasToolStripMenuItem.Name = "guardarPelículasToolStripMenuItem";
+            this.guardarPelículasToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.guardarPelículasToolStripMenuItem.Text = "Guardar lista películas";
+            this.guardarPelículasToolStripMenuItem.Click += new System.EventHandler(this.guardarPelículasToolStripMenuItem_Click);
+            // 
+            // guardarSeriesToolStripMenuItem
+            // 
+            this.guardarSeriesToolStripMenuItem.Name = "guardarSeriesToolStripMenuItem";
+            this.guardarSeriesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.guardarSeriesToolStripMenuItem.Text = "Guardar lista series";
+            this.guardarSeriesToolStripMenuItem.Click += new System.EventHandler(this.guardarSeriesToolStripMenuItem_Click);
+            // 
+            // guardarComoToolStripMenuItem1
+            // 
+            this.guardarComoToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.guardarComoPelículasToolStripMenuItem1,
+            this.guardarComoSeriesToolStripMenuItem1});
+            this.guardarComoToolStripMenuItem1.Name = "guardarComoToolStripMenuItem1";
+            this.guardarComoToolStripMenuItem1.Size = new System.Drawing.Size(95, 20);
+            this.guardarComoToolStripMenuItem1.Text = "Guardar como";
+            // 
+            // guardarComoPelículasToolStripMenuItem1
+            // 
+            this.guardarComoPelículasToolStripMenuItem1.Name = "guardarComoPelículasToolStripMenuItem1";
+            this.guardarComoPelículasToolStripMenuItem1.Size = new System.Drawing.Size(120, 22);
+            this.guardarComoPelículasToolStripMenuItem1.Text = "Películas";
+            this.guardarComoPelículasToolStripMenuItem1.Click += new System.EventHandler(this.guardarComoPelículasToolStripMenuItem1_Click);
+            // 
+            // guardarComoSeriesToolStripMenuItem1
+            // 
+            this.guardarComoSeriesToolStripMenuItem1.Name = "guardarComoSeriesToolStripMenuItem1";
+            this.guardarComoSeriesToolStripMenuItem1.Size = new System.Drawing.Size(120, 22);
+            this.guardarComoSeriesToolStripMenuItem1.Text = "Series";
+            this.guardarComoSeriesToolStripMenuItem1.Click += new System.EventHandler(this.guardarComoSeriesToolStripMenuItem1_Click);
+            // 
+            // lblConfirmacionArchivos
+            // 
+            this.lblConfirmacionArchivos.AutoSize = true;
+            this.lblConfirmacionArchivos.BackColor = System.Drawing.Color.Black;
+            this.lblConfirmacionArchivos.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lblConfirmacionArchivos.Location = new System.Drawing.Point(662, 9);
+            this.lblConfirmacionArchivos.Name = "lblConfirmacionArchivos";
+            this.lblConfirmacionArchivos.Size = new System.Drawing.Size(94, 15);
+            this.lblConfirmacionArchivos.TabIndex = 10;
+            this.lblConfirmacionArchivos.Text = "Archivo cargado";
             // 
             // FrmPrincipal
             // 
@@ -157,6 +242,7 @@ namespace AplicacionIMDb
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(823, 406);
+            this.Controls.Add(this.lblConfirmacionArchivos);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
@@ -172,6 +258,7 @@ namespace AplicacionIMDb
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IMDb";
+            this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -197,6 +284,15 @@ namespace AplicacionIMDb
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.Label lblConfirmacionArchivos;
+        private System.Windows.Forms.ToolStripMenuItem guardarComoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem listaPelículasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaSeriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guardarComoPelículasToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem guardarComoSeriesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem guardarPelículasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guardarSeriesToolStripMenuItem;
     }
 }
 

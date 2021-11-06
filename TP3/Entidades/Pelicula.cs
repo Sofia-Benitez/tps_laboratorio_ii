@@ -7,12 +7,14 @@ namespace Entidades
     public class Pelicula : ContenidoAudiovisual
     {
         private double duracion;
-        public Pelicula(string titulo, int año, float puntuacion, string genero, Equipo equipo, double duracion) : base(titulo, año, puntuacion, genero, equipo)
+       
+        public Pelicula(int id, string titulo, int añoLanzamiento, float puntuacion, string genero, Equipo equipo, double duracion)
+            : base(id, titulo, añoLanzamiento, puntuacion, genero, equipo)
         {
             this.duracion = duracion;
         }
 
-        public double DuracionEnMinutos
+        public double Duracion
         {
             get
             {
@@ -28,9 +30,9 @@ namespace Entidades
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Titulo: {this.Titulo}");
             sb.AppendLine("Película");
-            sb.AppendLine($"{this.AñoDeLanzamiento}");
+            sb.AppendLine($"{this.AñoLanzamiento}");
             sb.AppendLine($"Género: {this.Genero}");
-            sb.AppendLine($"Duración: {this.DuracionEnMinutos}");
+            sb.AppendLine($"Duración: {this.Duracion}");
             sb.AppendLine($"Puntuación: {this.Puntuacion}");
             sb.AppendLine(this.equipo.Mostrar());
 
@@ -53,6 +55,17 @@ namespace Entidades
             return !(pelicula1 == pelicula2);
         }
 
-        
+        public override bool Equals(object obj)
+        {
+            Pelicula pelicula = obj as Pelicula;
+
+            return pelicula is not null && this == pelicula;
+        }
+
+        public override int GetHashCode()
+        {
+            return (titulo, añoLanzamiento).GetHashCode();
+        }
+
     }
 }

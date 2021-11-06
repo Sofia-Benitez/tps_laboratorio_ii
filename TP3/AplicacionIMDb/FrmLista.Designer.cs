@@ -32,11 +32,14 @@ namespace AplicacionIMDb
             this.dataGridLista = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblResultado = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnEstadistica3 = new System.Windows.Forms.Button();
+            this.btnEstadistica2 = new System.Windows.Forms.Button();
+            this.btnEstadistica1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
@@ -47,6 +50,7 @@ namespace AplicacionIMDb
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -56,13 +60,11 @@ namespace AplicacionIMDb
             this.dataGridLista.AllowUserToAddRows = false;
             this.dataGridLista.AllowUserToDeleteRows = false;
             this.dataGridLista.AllowUserToOrderColumns = true;
-            this.dataGridLista.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridLista.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridLista.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dataGridLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridLista.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dataGridLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridLista.Location = new System.Drawing.Point(0, 0);
             this.dataGridLista.Name = "dataGridLista";
             this.dataGridLista.ReadOnly = true;
@@ -73,7 +75,7 @@ namespace AplicacionIMDb
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.splitContainer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -94,12 +96,42 @@ namespace AplicacionIMDb
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 325);
+            this.panel1.Location = new System.Drawing.Point(0, 319);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(315, 139);
+            this.panel1.Size = new System.Drawing.Size(315, 145);
             this.panel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblResultado);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(315, 145);
+            this.panel2.TabIndex = 4;
+            // 
+            // lblResultado
+            // 
+            this.lblResultado.AutoSize = true;
+            this.lblResultado.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.lblResultado.Location = new System.Drawing.Point(141, 72);
+            this.lblResultado.Name = "lblResultado";
+            this.lblResultado.Size = new System.Drawing.Size(38, 15);
+            this.lblResultado.TabIndex = 1;
+            this.lblResultado.Text = "label3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(141, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "label2";
             // 
             // label1
             // 
@@ -114,47 +146,54 @@ namespace AplicacionIMDb
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.button2, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.button3, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnEstadistica3, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.btnEstadistica2, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnEstadistica1, 0, 1);
             this.tableLayoutPanel2.Cursor = System.Windows.Forms.Cursors.Default;
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 68);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 4;
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(315, 177);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(315, 251);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
-            // button1
+            // btnEstadistica3
             // 
-            this.button1.Location = new System.Drawing.Point(3, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(309, 38);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnEstadistica3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEstadistica3.Location = new System.Drawing.Point(3, 137);
+            this.btnEstadistica3.Name = "btnEstadistica3";
+            this.btnEstadistica3.Size = new System.Drawing.Size(309, 51);
+            this.btnEstadistica3.TabIndex = 4;
+            this.btnEstadistica3.Text = "b3";
+            this.btnEstadistica3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnEstadistica2
             // 
-            this.button2.Location = new System.Drawing.Point(3, 91);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(309, 38);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnEstadistica2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEstadistica2.Location = new System.Drawing.Point(3, 80);
+            this.btnEstadistica2.Name = "btnEstadistica2";
+            this.btnEstadistica2.Size = new System.Drawing.Size(309, 51);
+            this.btnEstadistica2.TabIndex = 3;
+            this.btnEstadistica2.Text = "b2";
+            this.btnEstadistica2.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnEstadistica1
             // 
-            this.button3.Location = new System.Drawing.Point(3, 135);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(309, 38);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnEstadistica1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnEstadistica1.Location = new System.Drawing.Point(3, 23);
+            this.btnEstadistica1.Name = "btnEstadistica1";
+            this.btnEstadistica1.Size = new System.Drawing.Size(309, 51);
+            this.btnEstadistica1.TabIndex = 2;
+            this.btnEstadistica1.Text = "b1";
+            this.btnEstadistica1.UseVisualStyleBackColor = true;
+            this.btnEstadistica1.Click += new System.EventHandler(this.btnEstadistica1_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -216,7 +255,7 @@ namespace AplicacionIMDb
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // FrmListaPeliculas
+            // FrmLista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -235,6 +274,8 @@ namespace AplicacionIMDb
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -251,9 +292,12 @@ namespace AplicacionIMDb
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnEstadistica1;
+        private System.Windows.Forms.Button btnEstadistica2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnEstadistica3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblResultado;
     }
 }
