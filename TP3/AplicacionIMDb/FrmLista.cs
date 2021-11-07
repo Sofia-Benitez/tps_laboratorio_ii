@@ -205,6 +205,9 @@ namespace AplicacionIMDb
         private void btnEstadistica1_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
+            peliculasTerror.Clear();
+            seriesSinFinalizar.Clear();
+
             if (this.Text == "Películas")
             {
                 int resultado = MostrarPeliculasTerror();
@@ -230,6 +233,8 @@ namespace AplicacionIMDb
         private void btnEstadistica2_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
+            peliculas2000.Clear();
+            seriesComedia.Clear();
             if (this.Text == "Películas")
             {
                 int resultado = MostrarPeliculasEstrenadasDespuesDel2000();
@@ -255,6 +260,8 @@ namespace AplicacionIMDb
         private void btnEstadistica3_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
+            peliculasMás8Puntos.Clear();
+            seriesCompletas.Clear();
             if (this.Text == "Películas")
             {
                 int resultado = MostrarPeliculasConMasDe8Puntos();
@@ -386,7 +393,7 @@ namespace AplicacionIMDb
             int contadorPeliculas = 0;
             foreach (Pelicula item in baseDeDatosSeriesYPeliculas.Peliculas)
             {
-                if (item.AñoLanzamiento >= 2000 && !(this.peliculasTerror.Contains(item)))
+                if (item.AñoLanzamiento >= 2000 && !(this.peliculas2000.Contains(item)))
                 {
                     this.peliculas2000.Add(item);
                     contadorPeliculas++;

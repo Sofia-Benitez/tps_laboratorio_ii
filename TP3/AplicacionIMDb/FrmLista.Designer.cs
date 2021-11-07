@@ -121,12 +121,12 @@ namespace AplicacionIMDb
             // 
             this.lblResultado.AutoSize = true;
             this.lblResultado.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblResultado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblResultado.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblResultado.ForeColor = System.Drawing.Color.White;
-            this.lblResultado.Location = new System.Drawing.Point(49, 34);
+            this.lblResultado.Location = new System.Drawing.Point(3, 3);
             this.lblResultado.Name = "lblResultado";
             this.lblResultado.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblResultado.Size = new System.Drawing.Size(82, 21);
+            this.lblResultado.Size = new System.Drawing.Size(69, 17);
             this.lblResultado.TabIndex = 1;
             this.lblResultado.Text = "Estadistica";
             // 

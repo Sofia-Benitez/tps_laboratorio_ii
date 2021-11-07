@@ -79,7 +79,7 @@ namespace Entidades
         }
 
         /// <summary>
-        /// método que permite leer el contenido de un archivo y deserializarlo 
+        /// método que permite leer el contenido de un archivo y deserializarlo utilizando el método Deserialize() de la lclase JsonSerializer
         /// </summary>
         /// <param name="ruta"></param>
         /// <returns>devuelve el contenido del archivo </returns>

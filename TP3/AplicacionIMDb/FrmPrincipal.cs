@@ -110,6 +110,7 @@ namespace AplicacionIMDb
         /// utiliza el metodo leer de la clase ArchivoJson y carga en una lista lo que devuelve el metodo
         /// si esta lista no esta vacia se agregan a la lista de peliculas que contiene la clase IMDb
         /// se actualiza el datasource del datagrid para que se vean relfejados los cambios
+        /// Si el archivo que se quiere abrir no es del tipo Json atrapa la excepcion correspondiente
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
