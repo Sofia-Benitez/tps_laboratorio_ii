@@ -184,6 +184,7 @@ namespace AplicacionIMDb
         /// <param name="e"></param>
         private void btnVerTodas_Click(object sender, EventArgs e)
         {
+            lblResultado.Text = "";
             if (this.Text == "Películas")
             {
                 
@@ -273,7 +274,7 @@ namespace AplicacionIMDb
             {
                 int resultado = MostrarSeriesCompletas();
                 dataGridLista.DataSource = null;
-                dataGridLista.DataSource = this.seriesComedia;
+                dataGridLista.DataSource = this.seriesCompletas;
                 lblResultado.Text = $"Cantidad de series completas: {resultado.ToString()}";
             }
         }
