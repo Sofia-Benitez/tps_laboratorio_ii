@@ -12,7 +12,12 @@ namespace Entidades
         private string escritor;
         private List<string> actores;
 
-        
+        /// <summary>
+        /// Constructor de la clase Equipo, permite instancias un objeto con todos sus atributos
+        /// </summary>
+        /// <param name="director"></param>
+        /// <param name="escritor"></param>
+        /// <param name="actores"></param>
         public Equipo(string director, string escritor, List<string> actores)
         {
             this.director = director;
@@ -20,6 +25,9 @@ namespace Entidades
             this.actores = actores;
         }
 
+        /// <summary>
+        /// Propiedad Director, permite leer y editar el atributo
+        /// </summary>
         public string Director
         {
             get
@@ -32,6 +40,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Propiedad Escritor, permite leer y editar el atributo
+        /// </summary>
         public string Escritor
         {
             get
@@ -44,6 +55,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Propiedad Actores, permite leer y editar la lista
+        /// </summary>
         public List<string> Actores
         {
             get
@@ -57,7 +71,10 @@ namespace Entidades
         }
 
 
-
+        /// <summary>
+        /// Metodo que permite mostrar los datos del objeto
+        /// </summary>
+        /// <returns></returns>
         public string Mostrar()
         {
             StringBuilder sb = new StringBuilder();
@@ -72,6 +89,10 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// sobrecarga del metodo para que devuelva el metodo Mostrar()
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return this.Mostrar();

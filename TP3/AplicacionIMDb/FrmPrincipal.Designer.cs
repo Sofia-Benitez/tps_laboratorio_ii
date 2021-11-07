@@ -31,13 +31,7 @@ namespace AplicacionIMDb
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.btnPeliculas = new System.Windows.Forms.Button();
-            this.btnSeries = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.logo = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaPelículasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,98 +43,48 @@ namespace AplicacionIMDb
             this.guardarComoPelículasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoSeriesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lblConfirmacionArchivos = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSeries = new System.Windows.Forms.Button();
+            this.dataGridViewSeries = new System.Windows.Forms.DataGridView();
+            this.dataGridViewPeliculas = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSeries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPeliculas)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPeliculas
             // 
             this.btnPeliculas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnPeliculas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnPeliculas.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
             this.btnPeliculas.FlatAppearance.BorderSize = 4;
             this.btnPeliculas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPeliculas.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnPeliculas.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnPeliculas.Location = new System.Drawing.Point(155, 161);
+            this.btnPeliculas.Location = new System.Drawing.Point(3, 3);
             this.btnPeliculas.Name = "btnPeliculas";
-            this.btnPeliculas.Size = new System.Drawing.Size(230, 52);
+            this.btnPeliculas.Size = new System.Drawing.Size(909, 44);
             this.btnPeliculas.TabIndex = 0;
             this.btnPeliculas.Text = "Películas";
             this.btnPeliculas.UseVisualStyleBackColor = false;
             this.btnPeliculas.Click += new System.EventHandler(this.btnPeliculas_Click);
             // 
-            // btnSeries
+            // logo
             // 
-            this.btnSeries.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSeries.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.btnSeries.FlatAppearance.BorderSize = 4;
-            this.btnSeries.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSeries.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSeries.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSeries.Location = new System.Drawing.Point(448, 161);
-            this.btnSeries.Name = "btnSeries";
-            this.btnSeries.Size = new System.Drawing.Size(230, 52);
-            this.btnSeries.TabIndex = 2;
-            this.btnSeries.Text = "Series";
-            this.btnSeries.UseVisualStyleBackColor = false;
-            this.btnSeries.Click += new System.EventHandler(this.btnSeries_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(30, 245);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(126, 135);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(190, 245);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(126, 135);
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(348, 245);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(126, 135);
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(506, 245);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(126, 135);
-            this.pictureBox4.TabIndex = 6;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(662, 245);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(126, 135);
-            this.pictureBox5.TabIndex = 7;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
-            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox6.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.ErrorImage")));
-            this.pictureBox6.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.InitialImage")));
-            this.pictureBox6.Location = new System.Drawing.Point(303, 46);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(223, 100);
-            this.pictureBox6.TabIndex = 8;
-            this.pictureBox6.TabStop = false;
+            this.logo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logo.BackgroundImage")));
+            this.logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.logo.ErrorImage = ((System.Drawing.Image)(resources.GetObject("logo.ErrorImage")));
+            this.logo.InitialImage = ((System.Drawing.Image)(resources.GetObject("logo.InitialImage")));
+            this.logo.Location = new System.Drawing.Point(352, 47);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(224, 100);
+            this.logo.TabIndex = 8;
+            this.logo.TabStop = false;
             // 
             // menuStrip1
             // 
@@ -151,7 +95,7 @@ namespace AplicacionIMDb
             this.guardarComoToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(823, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(915, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -184,6 +128,7 @@ namespace AplicacionIMDb
             this.guardarToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.guardarPelículasToolStripMenuItem,
             this.guardarSeriesToolStripMenuItem});
+            this.guardarToolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guardarToolStripMenuItem1.Name = "guardarToolStripMenuItem1";
             this.guardarToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
             this.guardarToolStripMenuItem1.Text = "Guardar";
@@ -207,6 +152,7 @@ namespace AplicacionIMDb
             this.guardarComoToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.guardarComoPelículasToolStripMenuItem1,
             this.guardarComoSeriesToolStripMenuItem1});
+            this.guardarComoToolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.guardarComoToolStripMenuItem1.Name = "guardarComoToolStripMenuItem1";
             this.guardarComoToolStripMenuItem1.Size = new System.Drawing.Size(95, 20);
             this.guardarComoToolStripMenuItem1.Text = "Guardar como";
@@ -236,21 +182,86 @@ namespace AplicacionIMDb
             this.lblConfirmacionArchivos.TabIndex = 10;
             this.lblConfirmacionArchivos.Text = "Archivo cargado";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.btnSeries, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewSeries, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewPeliculas, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnPeliculas, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 176);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(915, 488);
+            this.tableLayoutPanel1.TabIndex = 11;
+            // 
+            // btnSeries
+            // 
+            this.btnSeries.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSeries.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSeries.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
+            this.btnSeries.FlatAppearance.BorderSize = 4;
+            this.btnSeries.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSeries.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSeries.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSeries.Location = new System.Drawing.Point(3, 247);
+            this.btnSeries.Name = "btnSeries";
+            this.btnSeries.Size = new System.Drawing.Size(909, 44);
+            this.btnSeries.TabIndex = 3;
+            this.btnSeries.Text = "Series";
+            this.btnSeries.UseVisualStyleBackColor = false;
+            this.btnSeries.Click += new System.EventHandler(this.btnSeries_Click_1);
+            // 
+            // dataGridViewSeries
+            // 
+            this.dataGridViewSeries.AllowUserToAddRows = false;
+            this.dataGridViewSeries.AllowUserToDeleteRows = false;
+            this.dataGridViewSeries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewSeries.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewSeries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSeries.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewSeries.Enabled = false;
+            this.dataGridViewSeries.Location = new System.Drawing.Point(3, 297);
+            this.dataGridViewSeries.Name = "dataGridViewSeries";
+            this.dataGridViewSeries.ReadOnly = true;
+            this.dataGridViewSeries.RowTemplate.Height = 25;
+            this.dataGridViewSeries.Size = new System.Drawing.Size(909, 188);
+            this.dataGridViewSeries.TabIndex = 1;
+            // 
+            // dataGridViewPeliculas
+            // 
+            this.dataGridViewPeliculas.AllowUserToAddRows = false;
+            this.dataGridViewPeliculas.AllowUserToDeleteRows = false;
+            this.dataGridViewPeliculas.AllowUserToResizeColumns = false;
+            this.dataGridViewPeliculas.AllowUserToResizeRows = false;
+            this.dataGridViewPeliculas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewPeliculas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridViewPeliculas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPeliculas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPeliculas.Enabled = false;
+            this.dataGridViewPeliculas.Location = new System.Drawing.Point(3, 53);
+            this.dataGridViewPeliculas.Name = "dataGridViewPeliculas";
+            this.dataGridViewPeliculas.ReadOnly = true;
+            this.dataGridViewPeliculas.RowTemplate.Height = 25;
+            this.dataGridViewPeliculas.Size = new System.Drawing.Size(909, 188);
+            this.dataGridViewPeliculas.TabIndex = 0;
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(823, 406);
+            this.ClientSize = new System.Drawing.Size(915, 664);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.lblConfirmacionArchivos);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.btnSeries);
-            this.Controls.Add(this.btnPeliculas);
+            this.Controls.Add(this.logo);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -259,14 +270,12 @@ namespace AplicacionIMDb
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IMDb";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSeries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPeliculas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,13 +284,7 @@ namespace AplicacionIMDb
         #endregion
 
         private System.Windows.Forms.Button btnPeliculas;
-        private System.Windows.Forms.Button btnSeries;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox logo;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.Label lblConfirmacionArchivos;
@@ -293,6 +296,10 @@ namespace AplicacionIMDb
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem guardarPelículasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarSeriesToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnSeries;
+        private System.Windows.Forms.DataGridView dataGridViewSeries;
+        private System.Windows.Forms.DataGridView dataGridViewPeliculas;
     }
 }
 

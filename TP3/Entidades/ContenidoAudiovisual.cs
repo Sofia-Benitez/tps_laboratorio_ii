@@ -15,6 +15,15 @@ namespace Entidades
         protected string genero;
         protected Equipo equipo;
 
+        /// <summary>
+        /// Constructor de la clase abstracta ContenidoAudiovisual
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="titulo"></param>
+        /// <param name="añoLanzamiento"></param>
+        /// <param name="puntuacion"></param>
+        /// <param name="genero"></param>
+        /// <param name="equipo"></param>
         protected ContenidoAudiovisual(int id, string titulo, int añoLanzamiento, float puntuacion, string genero, Equipo equipo)
         {
             this.id=id;
@@ -25,6 +34,9 @@ namespace Entidades
             this.equipo = equipo;
         }
 
+        /// <summary>
+        /// Propiedad Id, permite leer y escribir el atributo
+        /// </summary>
         public int Id
         {
             get
@@ -36,6 +48,10 @@ namespace Entidades
                 this.id = value;
             }
         }
+
+        /// <summary>
+        /// Propiedad Titulo, permite leer y escribir el atributo
+        /// </summary>
         public string Titulo
         {
             get
@@ -48,6 +64,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Propiedad AñoLanzamiento, permite leer y escribir el atributo
+        /// </summary>
         public int AñoLanzamiento
         {
             get
@@ -60,6 +79,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Propiedad Puntuacion, permite leer y escribir el atributo
+        /// </summary>
         public float Puntuacion
         {
             get
@@ -72,6 +94,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Propiedad Genero, permite leer y escribir el atributo
+        /// </summary>
         public string Genero
         {
             get
@@ -84,6 +109,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Propiedad Equipo, permite leer y escribir el atributo
+        /// </summary>
         public Equipo Equipo
         {
             get
@@ -96,6 +124,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Método abstracto Mostrar() 
+        /// </summary>
+        /// <returns></returns>
         public abstract string Mostrar();
         
     }

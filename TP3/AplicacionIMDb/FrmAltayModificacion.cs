@@ -16,8 +16,17 @@ namespace AplicacionIMDb
         public Pelicula nuevaPelicula;
         public Pelicula peliculaModificar;
         public Serie serieModificar;
-
         public Serie nuevaSerie;
+
+        /// <summary>
+        /// constructor que instancia el formulario con los atributos minimos que necesita 
+        /// permite que funcione como un formulario para crear un objeto nuevo o para modificar un objeto que se pase por parámetros
+        /// muestra el titulo y el texto del boton segun corresponda
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <param name="tipo"></param>
+        /// <param name="textoConfirmar"></param>
+        /// <param name="contenidoModificar"></param>
         public FrmAltayModificacion(string titulo, string tipo, string textoConfirmar, ContenidoAudiovisual contenidoModificar)
         {
             InitializeComponent();
@@ -29,6 +38,12 @@ namespace AplicacionIMDb
            
         }
 
+        /// <summary>
+        /// Cuando se carga el formulario se muestran los controles que corresponden al tipo de objeto que se va a crear o modificar 
+        /// si se paso un objeto por parametros para modificar se mustran sus datos en los controles correspondientes 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmAltayModificacion_Load(object sender, EventArgs e)
         {
             if(lblTipoContenido.Text == "Película")
@@ -72,41 +87,76 @@ namespace AplicacionIMDb
             }
         }
 
+        /// <summary>
+        /// Al presionar el boton se modifica o se crea el objeto segun corresponda invocando a los metodos que ejecutan estas acciones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             if(lblTipoContenido.Text == "Película")
             {
                 if(peliculaModificar is null)
                 {
-                    AgregarPelicula();
+                    nuevaPelicula = AgregarPelicula();
+                    if (nuevaPelicula is not null)
+                    {
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
                 }
                 else
                 {
-                    ModificarPelicula();
+                    peliculaModificar = ModificarPelicula();
+                    if (peliculaModificar is not null)
+                    {
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
                 }
             }
             else
             {
                 if(serieModificar is null)
                 {
-                    AgregarSerie();
+                    nuevaSerie = AgregarSerie();
+                    if(nuevaSerie is not null)
+                    {
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    
                 }
                 else
                 {
-                    ModificarSerie();
+                    serieModificar = ModificarSerie();
+                    if (serieModificar is not null)
+                    {
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
                 }
                 
             }
             
         }
 
+        /// <summary>
+        /// Al presionar el boton cancelar se cierra el formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void AgregarPelicula()
+        /// <summary>
+        /// metodo que permite tomar los datos ingresados en los controles, los valida y si son correctos construye un objeto de tipo Pelicula
+        /// este objeto es asignado al atributo nuevaPelicula del formulario. Si el objeto se construye correctamente 
+        /// </summary>
+        private Pelicula AgregarPelicula()
         {
             string director = txtDirector.Text;
             string escritor = txtEscritor.Text;
@@ -119,7 +169,11 @@ namespace AplicacionIMDb
             string genero = cbxGenero.Text;
             string duracion = txtDuracion.Text;
 
-            if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
+            if (!(int.TryParse(año, out int añoNum) && double.TryParse(duracion, out double duracionNum) && float.TryParse(puntuacion, out float puntuacionNum)))
+            {
+                MessageBox.Show("Error. Algunos datos no se han ingresado correctamente");
+            }
+            else if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
                string.IsNullOrWhiteSpace(actor2) || string.IsNullOrWhiteSpace(actor3) || string.IsNullOrWhiteSpace(titulo) || string.IsNullOrWhiteSpace(año) || string.IsNullOrWhiteSpace(genero) ||
                string.IsNullOrWhiteSpace(duracion) || string.IsNullOrWhiteSpace(puntuacion))
             {
@@ -128,16 +182,18 @@ namespace AplicacionIMDb
             else
             {
                 Equipo equipoAgregar = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
-                nuevaPelicula = new Pelicula(0, titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, double.Parse(duracion));
-                if (nuevaPelicula is not null)
-                {
-                    DialogResult = DialogResult.OK;
-                    this.Close();
-                }
+                return nuevaPelicula = new Pelicula(0, titulo, añoNum, puntuacionNum, genero, equipoAgregar, duracionNum);
+               
             }
+            return null;
         }
 
-        private void ModificarPelicula()
+        /// <summary>
+        /// Metodo que recupera los datos de los controles para que el usuario los pueda modificar. Si son validados correctamente 
+        /// devuelve el objeto modificado
+        /// </summary>
+        /// <returns></returns>
+        private Pelicula ModificarPelicula()
         {
             string director = txtDirector.Text;
             string escritor = txtEscritor.Text;
@@ -150,7 +206,11 @@ namespace AplicacionIMDb
             string genero = cbxGenero.Text;
             string duracion = txtDuracion.Text;
 
-            if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
+            if (!int.TryParse(año, out int añoNum) && !double.TryParse(duracion, out double duracionNum) && !float.TryParse(puntuacion, out float puntuacionNum))
+            {
+                MessageBox.Show("Error. Algunos datos no se han ingresado correctamente");
+            }
+            else if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
                string.IsNullOrWhiteSpace(actor2) || string.IsNullOrWhiteSpace(actor3) || string.IsNullOrWhiteSpace(titulo) || string.IsNullOrWhiteSpace(año) || string.IsNullOrWhiteSpace(genero) ||
                string.IsNullOrWhiteSpace(duracion) || string.IsNullOrWhiteSpace(puntuacion))
             {
@@ -171,13 +231,18 @@ namespace AplicacionIMDb
                 peliculaModificar.Puntuacion = float.Parse(puntuacion);
                 if (peliculaModificar is not null)
                 {
-                    DialogResult = DialogResult.OK;
-                    this.Close();
+                    return peliculaModificar;
                 }
+               
             }
+            return null;
         }
 
-        private void AgregarSerie()
+        /// <summary>
+        /// metodo que permite tomar los datos ingresados en los controles, los valida y si son correctos construye un objeto de tipo Serie
+        /// este objeto es asignado al atributo nuevaPelicula del formulario. Si el objeto se construye correctamente 
+        /// </summary>
+        private Serie AgregarSerie()
         {
             string director = txtDirector.Text;
             string escritor = txtEscritor.Text;
@@ -190,9 +255,11 @@ namespace AplicacionIMDb
             string puntuacion = txtPuntuacion.Text;
             string genero = cbxGenero.Text;
             string temporadas = txtTemporadas.Text;
-            
-
-            if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
+            if(!(int.TryParse(año, out int añoNum) && int.TryParse(temporadas, out int temporadasNum) && float.TryParse(puntuacion, out float puntuacionNum) && (!int.TryParse(añoFin, out int añoFinNum) || !string.IsNullOrWhiteSpace(añoFin))) )
+            {
+                MessageBox.Show("Error. Algunos datos no se han ingresado correctamente");
+            }
+            else if(string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
                string.IsNullOrWhiteSpace(actor2) || string.IsNullOrWhiteSpace(actor3) || string.IsNullOrWhiteSpace(titulo) || string.IsNullOrWhiteSpace(año) || string.IsNullOrWhiteSpace(genero) ||
                string.IsNullOrWhiteSpace(puntuacion) || string.IsNullOrWhiteSpace(temporadas))
             {
@@ -202,17 +269,22 @@ namespace AplicacionIMDb
             {
                 Equipo equipoAgregar = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
                 
-                nuevaSerie = new Serie(0, titulo, int.Parse(año), float.Parse(puntuacion), genero, equipoAgregar, int.Parse(temporadas), int.Parse(añoFin));
+                nuevaSerie = new Serie(0, titulo, añoNum, puntuacionNum, genero, equipoAgregar, temporadasNum, añoFinNum);
                 
                 if (nuevaSerie is not null)
                 {
-                    DialogResult = DialogResult.OK;
-                    this.Close();
+                    return nuevaSerie;
                 }
             }
+            return null;
         }
 
-        private void ModificarSerie()
+        /// <summary>
+        /// Metodo que recupera los datos de los controles para que el usuario los pueda modificar. Si son validados correctamente 
+        /// devuelve el objeto modificado
+        /// </summary>
+        /// <returns></returns>
+        private Serie ModificarSerie()
         {
             string director = txtDirector.Text;
             string escritor = txtEscritor.Text;
@@ -226,7 +298,11 @@ namespace AplicacionIMDb
             string genero = cbxGenero.Text;
             string temporadas = txtTemporadas.Text;
 
-            if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
+            if (!(int.TryParse(año, out int añoNum) && int.TryParse(temporadas, out int temporadasNum) && float.TryParse(puntuacion, out float puntuacionNum) && (!int.TryParse(añoFin, out int añoFinNum) || !string.IsNullOrWhiteSpace(añoFin))))
+            {
+                MessageBox.Show("Error. Algunos datos no se han ingresado correctamente");
+            }
+            else if (string.IsNullOrWhiteSpace(director) || string.IsNullOrWhiteSpace(escritor) || string.IsNullOrWhiteSpace(actor1) ||
                string.IsNullOrWhiteSpace(actor2) || string.IsNullOrWhiteSpace(actor3) || string.IsNullOrWhiteSpace(titulo) || string.IsNullOrWhiteSpace(año) || string.IsNullOrWhiteSpace(genero) ||
                string.IsNullOrWhiteSpace(temporadas) || string.IsNullOrWhiteSpace(puntuacion))
             {
@@ -247,11 +323,12 @@ namespace AplicacionIMDb
                 serieModificar.Puntuacion = float.Parse(puntuacion);
                 if (serieModificar is not null)
                 {
-                    DialogResult = DialogResult.OK;
-                    this.Close();
+                    return serieModificar;
                 }
             }
+            return null;
         }
+
 
 
     }

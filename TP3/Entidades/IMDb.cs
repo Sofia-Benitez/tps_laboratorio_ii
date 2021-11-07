@@ -11,12 +11,18 @@ namespace Entidades
         private List<Pelicula> peliculas;
         private List<Serie> series;
 
+        /// <summary>
+        /// Constructor de la clase que instancia las listas que contiene
+        /// </summary>
         public IMDb()
         {
             peliculas = new List<Pelicula>();
             series = new List<Serie>();
         }
 
+        /// <summary>
+        /// Propiedad que permite leer y escribir la lista de películas 
+        /// </summary>
         public List<Pelicula> Peliculas
         {
             get
@@ -29,6 +35,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Propiedad que permite leer y escribir la lista de series 
+        /// </summary>
         public List<Serie> Series
         {
             get
@@ -41,6 +50,12 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// método que permite agregar una pelicula que se pasa por parametros a la lista de peliculas 
+        /// solo la agrega si no esta ya en la lista. Antes de agregarla le asigna un id
+        /// </summary>
+        /// <param name="nuevaPelicula">objeto del tipo Pelicula que se desea agregar en la lista</param>
+        /// <returns>Devuelve true si se agregó el objeto a la lista y false si no se agregó</returns>
         public bool AgregarContenido(Pelicula nuevaPelicula)
         {
             int nuevoID;
@@ -69,6 +84,12 @@ namespace Entidades
 
         }
 
+        /// <summary>
+        /// Sobrecarga del método AgregarContenido() para agregar una serie a la lista de series
+        /// solo la agrega si no esta ya en la lista. Antes de agregarla le asigna un id
+        /// </summary>
+        /// <param name="nuevaSerie">objeto del tipo Serie que se desea agregar en la lista</param>
+        /// <returns>Devuelve true si se agregó el objeto a la lista y false si no se agregó</returns>
         public bool AgregarContenido(Serie nuevaSerie)
         {
             int nuevoID;
