@@ -8,7 +8,7 @@ namespace UnitTest
     public class TestsJson
     {
         [TestMethod]
-        public void ValidarRuta_DeberiaRetornarTrueSiElArchivoEsJson()
+        public void ValidarExtension_DeberiaRetornarTrueSiElArchivoEsJson()
         {
             //arrange
             string ruta = "archivo.json";
@@ -23,7 +23,7 @@ namespace UnitTest
 
         [TestMethod]
         [ExpectedException(typeof(ArchivoIncorrectoException))]
-        public void ValidarRuta_DeberiaLanzarArchivoInocrrectoExeptioneSiElArchivoNoEsJSON()
+        public void ValidarExtension_DeberiaLanzarArchivoInocrrectoExeptioneSiElArchivoNoEsJSON()
         {
             //arrange
             string ruta = "archivo.bin";
