@@ -1,5 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Entidades;
 
 namespace Test
@@ -8,38 +15,37 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            
-            //IMDb imdb = new IMDb();
 
-            //Equipo equipoTitane = new Equipo("Julia Ducournau", "Julia Ducournau");
-            //equipoTitane.Actores.Add("Agathe Rousselle");
-            //equipoTitane.Actores.Add("Vincent Lindon");
-            //equipoTitane.Actores.Add("Garance Marillier");
-            //Pelicula titane = new Pelicula("Titane", 2021, 6.9F, "Horror", equipoTitane, 120);
-            
+            ///Abrir un archivo json con peliculas guardadas
+            IMDb imdb = new IMDb();
+            ///abre un archivo que se encuentra en el escritorio
+            string ruta = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            ruta = Path.Combine(ruta, "basePeliculas.json");
+            ArchivoJson<List<Pelicula>> puntoJsonPeliculas = new ArchivoJson<List<Pelicula>>();
 
-            //Equipo equipoMidsommar = new Equipo("Ari Aster", "Ari Aster");
-            //equipoMidsommar.Actores.Add("Florence Pugh");
-            //equipoMidsommar.Actores.Add("Vilhelm Blomgren");
-            //equipoMidsommar.Actores.Add("Jack Reynor");
+            List<Pelicula> peliculasCargadas;
+            try
+            {
+                peliculasCargadas = puntoJsonPeliculas.Leer(ruta);
+                if (peliculasCargadas is not null)
+                {
+                    foreach (Pelicula item in peliculasCargadas)
+                    {
+                        imdb.AgregarContenido(item);
+                    }
+                    
+                }
 
-            //Pelicula midsommar = new Pelicula("Midsommar", 2019, 7.1F, "Horror", equipoMidsommar, 148);
-            //imdb.AgregarContenido(midsommar);
-            //imdb.AgregarContenido(titane);
+            }
+            catch (ArchivoIncorrectoException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
-            //Equipo pelieq = new Equipo("lala", "pepe", new List<string> { "lala", "kksads", "djjf" });
-            //Pelicula peli = new Pelicula("dsds", 111, 2F, "terror", pelieq, 122);
-            //imdb.AgregarContenido(peli);
-
-
-            //Console.WriteLine("Lista de peliculas");
-            //foreach (Pelicula item in imdb.Peliculas)
-            //{
-               
-            //    Console.WriteLine(item.Id);
-            //    Console.WriteLine(item.Mostrar());
-            //}
-      
+            foreach(Pelicula item in imdb.Peliculas)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
