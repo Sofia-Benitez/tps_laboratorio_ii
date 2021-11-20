@@ -14,24 +14,19 @@ namespace AplicacionIMDb
 
     public partial class FrmLista : Form
     {
-        IMDb baseDeDatosSeriesYPeliculas;
-        List<Serie> seriesSinFinalizar = new List<Serie>();
-        List<Serie> seriesComedia = new List<Serie>();
-        List<Serie> seriesCompletas = new List<Serie>();
-        List<Pelicula> peliculasTerror = new List<Pelicula>();
-        List<Pelicula> peliculas2000 = new List<Pelicula>();
-        List<Pelicula> peliculasMás8Puntos = new List<Pelicula>();
+        IMDb imdb;
+        
 
         /// <summary>
         /// constructor del formulario. para instanciarlo debe recibir el tipo de dato que se mostrara (pelicula o serie) y el objeto del tipo IMDb que se instancio en le frm pricipal
         /// </summary>
         /// <param name="tipo"></param>
         /// <param name="imdb"></param>
-        public FrmLista(string tipo, IMDb imdb)
+        public FrmLista(string tipo, IMDb baseDatos)
         {
             InitializeComponent();
             this.Text = tipo;
-            baseDeDatosSeriesYPeliculas = imdb;
+            this.imdb = baseDatos;
 
         }
 
@@ -80,7 +75,7 @@ namespace AplicacionIMDb
 
                 if (frmAltaModificacion.DialogResult == DialogResult.OK)
                 {
-                    baseDeDatosSeriesYPeliculas.AgregarContenido(frmAltaModificacion.nuevaPelicula);
+                    imdb.AgregarContenido(frmAltaModificacion.nuevaPelicula);
                     ActualizarDataSourcePeliculas();
                 }
             }
@@ -92,7 +87,7 @@ namespace AplicacionIMDb
 
                 if (frmAltaModificacion.DialogResult == DialogResult.OK)
                 {
-                    baseDeDatosSeriesYPeliculas.AgregarContenido(frmAltaModificacion.nuevaSerie);
+                    imdb.AgregarContenido(frmAltaModificacion.nuevaSerie);
                     ActualizarDataSourceSeries();
                 }
             }
@@ -114,13 +109,13 @@ namespace AplicacionIMDb
                 if (this.Text == "Películas")
                 {
                     Pelicula pelicula = dataGridLista.SelectedRows[0].DataBoundItem as Pelicula;
-                    baseDeDatosSeriesYPeliculas.Peliculas.Remove(pelicula);
+                    imdb.Peliculas.Remove(pelicula);
                     ActualizarDataSourcePeliculas();
                 }
                 else
                 {
                     Serie serie = dataGridLista.SelectedRows[0].DataBoundItem as Serie;
-                    baseDeDatosSeriesYPeliculas.Series.Remove(serie);
+                    imdb.Series.Remove(serie);
                     ActualizarDataSourceSeries();
                 }
 
@@ -206,21 +201,21 @@ namespace AplicacionIMDb
         private void btnEstadistica1_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            peliculasTerror.Clear();
-            seriesSinFinalizar.Clear();
+            imdb.PeliculasTerror.Clear();
+            imdb.SeriesSinFinalizar.Clear();
 
             if (this.Text == "Películas")
             {
-                int resultado = MostrarPeliculasTerror();
+                string resultado = imdb.MostrarPeliculasTerror();
                 dataGridLista.DataSource = null;
-                dataGridLista.DataSource = this.peliculasTerror;
-                lblResultado.Text = $"Cantidad de películas de terror: {resultado.ToString()}";
+                dataGridLista.DataSource = imdb.PeliculasTerror;
+                lblResultado.Text = resultado;
             }
             else
             {
-                int resultado = MostrarSeriesSinFinalizar();
+                int resultado = imdb.MostrarSeriesSinFinalizar();
                 dataGridLista.DataSource = null;
-                dataGridLista.DataSource = this.seriesSinFinalizar;
+                dataGridLista.DataSource = imdb.SeriesSinFinalizar;
                 lblResultado.Text = $"Cantidad de series que no han finalizado: {resultado.ToString()}";
             }
         }
@@ -234,20 +229,20 @@ namespace AplicacionIMDb
         private void btnEstadistica2_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            peliculas2000.Clear();
-            seriesComedia.Clear();
+            imdb.Peliculas2000.Clear();
+            imdb.SeriesComedia.Clear();
             if (this.Text == "Películas")
             {
-                int resultado = MostrarPeliculasEstrenadasDespuesDel2000();
+                string resultado = imdb.MostrarPeliculasEstrenadasDespuesDel2000();
                 dataGridLista.DataSource = null;
-                dataGridLista.DataSource = this.peliculas2000;
-                lblResultado.Text = $"Cantidad de películas posteriores al 2000: {resultado.ToString()}";
+                dataGridLista.DataSource = imdb.Peliculas2000;
+                lblResultado.Text = resultado;
             }
             else
             {
-                int resultado = MostrarSeriesComedia();
+                int resultado = imdb.MostrarSeriesComedia();
                 dataGridLista.DataSource = null;
-                dataGridLista.DataSource = this.seriesComedia;
+                dataGridLista.DataSource = imdb.SeriesComedia;
                 lblResultado.Text = $"Cantidad de series de comedia: {resultado.ToString()}";
             }
         }
@@ -261,20 +256,20 @@ namespace AplicacionIMDb
         private void btnEstadistica3_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            peliculasMás8Puntos.Clear();
-            seriesCompletas.Clear();
+            imdb.PeliculasMás8Puntos.Clear();
+            imdb.SeriesCompletas.Clear();
             if (this.Text == "Películas")
             {
-                int resultado = MostrarPeliculasConMasDe8Puntos();
+                string resultado = imdb.MostrarPeliculasConMasDe8Puntos();
                 dataGridLista.DataSource = null;
-                dataGridLista.DataSource = this.peliculasMás8Puntos;
-                lblResultado.Text = $"Cantidad de películas con puntuación mayor a 8: {resultado.ToString()}";
+                dataGridLista.DataSource = imdb.PeliculasMás8Puntos;
+                lblResultado.Text =resultado;
             }
             else
             {
-                int resultado = MostrarSeriesCompletas();
+                int resultado = imdb.MostrarSeriesCompletas();
                 dataGridLista.DataSource = null;
-                dataGridLista.DataSource = this.seriesCompletas;
+                dataGridLista.DataSource = imdb.SeriesCompletas;
                 lblResultado.Text = $"Cantidad de series completas: {resultado.ToString()}";
             }
         }
@@ -285,7 +280,7 @@ namespace AplicacionIMDb
         private void ActualizarDataSourcePeliculas()
         {
             dataGridLista.DataSource = null;
-            dataGridLista.DataSource = baseDeDatosSeriesYPeliculas.Peliculas;
+            dataGridLista.DataSource = imdb.Peliculas;
         }
 
         /// <summary>
@@ -294,134 +289,11 @@ namespace AplicacionIMDb
         private void ActualizarDataSourceSeries()
         {
             dataGridLista.DataSource = null;
-            dataGridLista.DataSource = baseDeDatosSeriesYPeliculas.Series;
+            dataGridLista.DataSource = imdb.Series;
         }
 
 
-        //ESTADISTICAS
        
-        /// <summary>
-        /// metodo que recorre la lista de series y agrega a una lista del formulario actual los elementos que no esten repetidos.
-        /// cada vez que agrega un elemento suma una unidad a un contador
-        /// solo agrega las series que no hayan finalizado, es decir que su año de finalizaccion este en su valor por default
-        /// </summary>
-        /// <returns>Devuelve la cantidad de series agregadas a la lista</returns>
-        public int MostrarSeriesSinFinalizar()
-        {
-            int contadorSeries = 0;
-            foreach (Serie item in baseDeDatosSeriesYPeliculas.Series)
-            {
-                if(item.AñoFinalizacion==0 && !(this.seriesSinFinalizar.Contains(item)))
-                {
-                    this.seriesSinFinalizar.Add(item);
-                    contadorSeries++;
-                }
-            }
-
-            return contadorSeries;
-        }
-
-        /// <summary>
-        /// metodo que recorre la lista de series y agrega a una lista del formulario actual los elementos que no esten repetidos.
-        /// cada vez que agrega un elemento suma una unidad a un contador
-        /// solo agrega las series hayan finalizado, es decir que su año de finalizaccion sea distinto a su valor por default
-        /// </summary>
-        /// <returns>Devuelve la cantidad de series agregadas a la lista</returns>
-        public int MostrarSeriesCompletas()
-        {
-            int contadorSeries = 0;
-            foreach (Serie item in baseDeDatosSeriesYPeliculas.Series)
-            {
-                if (item.AñoFinalizacion != 0 && !(this.seriesCompletas.Contains(item)))
-                {
-                    this.seriesCompletas.Add(item);
-                    contadorSeries++;
-                }
-            }
-
-            return contadorSeries;
-        }
-
-        /// <summary>
-        /// metodo que recorre la lista de series y agrega a una lista del formulario actual los elementos que no esten repetidos.
-        /// cada vez que agrega un elemento suma una unidad a un contador
-        /// solo agrega las series cuyo género sea Comedia
-        /// </summary>
-        /// <returns>Devuelve la cantidad de series agregadas a la lista</returns>
-        public int MostrarSeriesComedia()
-        {
-            int contadorSeries = 0;
-            foreach (Serie item in baseDeDatosSeriesYPeliculas.Series)
-            {
-                if (item.Genero=="Comedia" && !(this.seriesComedia.Contains(item)))
-                {
-                    this.seriesComedia.Add(item);
-                    contadorSeries++;
-                }
-            }
-
-            return contadorSeries;
-        }
-
-        /// <summary>
-        /// metodo que recorre la lista de peliculas y agrega a una lista del formulario actual los elementos que no esten repetidos.
-        /// cada vez que agrega un elemento suma una unidad a un contador
-        /// solo agrega las películas cuyo genero sea Terror
-        /// </summary>
-        /// <returns>Devuelve la cantidad de peliculas agregadas a la lista</returns>
-        public int MostrarPeliculasTerror()
-        {
-            int contadorPeliculas = 0;
-            foreach (Pelicula item in baseDeDatosSeriesYPeliculas.Peliculas)
-            {
-                if(item.Genero=="Terror" && !(this.peliculasTerror.Contains(item)))
-                {
-                    this.peliculasTerror.Add(item);
-                    contadorPeliculas++;
-                }
-            }
-            return contadorPeliculas;
-        }
-
-        /// <summary>
-        /// metodo que recorre la lista de peliculas y agrega a una lista del formulario actual los elementos que no esten repetidos.
-        /// cada vez que agrega un elemento suma una unidad a un contador
-        /// solo agrega las películas estrenadas despues del año 2000, es decir que su año de lanzamiento sea mayor o igual a 2000
-        /// </summary>
-        /// <returns>Devuelve la cantidad de peliculas agregadas a la lista</returns>
-        public int MostrarPeliculasEstrenadasDespuesDel2000()
-        {
-            int contadorPeliculas = 0;
-            foreach (Pelicula item in baseDeDatosSeriesYPeliculas.Peliculas)
-            {
-                if (item.AñoLanzamiento >= 2000 && !(this.peliculas2000.Contains(item)))
-                {
-                    this.peliculas2000.Add(item);
-                    contadorPeliculas++;
-                }
-            }
-            return contadorPeliculas;
-        }
-
-        /// <summary>
-        /// metodo que recorre la lista de peliculas y agrega a una lista del formulario actual los elementos que no esten repetidos.
-        /// cada vez que agrega un elemento suma una unidad a un contador
-        /// solo agrega las películas cuyo puntaje sea mayor o igual a 8
-        /// </summary>
-        /// <returns>Devuelve la cantidad de peliculas agregadas a la lista</returns>
-        public int MostrarPeliculasConMasDe8Puntos()
-        {
-            int contadorPeliculas = 0;
-            foreach (Pelicula item in baseDeDatosSeriesYPeliculas.Peliculas)
-            {
-                if (item.Puntuacion >= 8 && !(this.peliculasMás8Puntos.Contains(item)))
-                {
-                    this.peliculasMás8Puntos.Add(item);
-                    contadorPeliculas++;
-                }
-            }
-            return contadorPeliculas;
-        }
 
         
     }
