@@ -11,6 +11,7 @@ namespace Entidades
         private string director;
         private string escritor;
         private List<string> actores;
+        private int id;
 
         /// <summary>
         /// Constructor de la clase Equipo, permite instancias un objeto con todos sus atributos
@@ -18,8 +19,9 @@ namespace Entidades
         /// <param name="director"></param>
         /// <param name="escritor"></param>
         /// <param name="actores"></param>
-        public Equipo(string director, string escritor, List<string> actores)
+        public Equipo(int id, string director, string escritor, List<string> actores)
         {
+            this.id = id;
             this.director = director;
             this.escritor = escritor;
             this.actores = actores;
@@ -69,6 +71,8 @@ namespace Entidades
                 this.actores = value;
             }
         }
+
+        public int Id { get => id; set => id = value; }
 
 
         /// <summary>

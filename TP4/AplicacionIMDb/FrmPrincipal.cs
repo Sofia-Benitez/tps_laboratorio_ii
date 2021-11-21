@@ -128,6 +128,8 @@ namespace AplicacionIMDb
                         foreach (Pelicula item in peliculasCargadas)
                         {
                             imdb.AgregarContenido(item);
+                            item.Equipo.Id = imdb.BuscarNuevoIDEquipo();
+                            imdb.Equipos.Add(item.Equipo);
                         }
                         lblConfirmacionArchivos.Text = "Listado de películas cargado";
                         ActualizarDataSourcePeliculas();
@@ -333,5 +335,50 @@ namespace AplicacionIMDb
             dataGridViewSeries.DataSource= imdb.Series;
         }
 
+        /// <summary>
+        /// Cuando se cierra el formulario principal si hay peliculas cargadas un mensaje permite elegir al usuario si guardar o no la lsta en una base de datos
+        /// Si selecciona YES el programa guarda todas las peliculas en una base de datos y cierra el programa. 
+        /// Si las peliculas ya estan cargadas no las guarda. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (imdb.Peliculas.Any())
+            {
+                if (MessageBox.Show("¿Desea guardar los datos en la base de datos antes de salir?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                {
+                    try
+                    {
+
+                        foreach (Pelicula item in imdb.Peliculas)
+                        {
+                            AccesoBD.Guardar(item);
+
+                        }
+
+                        MessageBox.Show("Peliculas guardadas en la base de datos.");
+                        
+
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Error al guardar los elementos en la base de datos");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Adiós");
+            }
+
+
+
+
+
+
+
+
+        }
     }
 }

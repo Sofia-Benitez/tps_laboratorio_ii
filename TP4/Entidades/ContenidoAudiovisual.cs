@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    
     public abstract class ContenidoAudiovisual
     {
         protected int id;
@@ -52,7 +53,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad Titulo, permite leer y escribir el atributo
         /// </summary>
-        public string Titulo
+        public virtual string Titulo
         {
             get
             {
@@ -67,7 +68,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad AñoLanzamiento, permite leer y escribir el atributo
         /// </summary>
-        public int AñoLanzamiento
+        public virtual int AñoLanzamiento
         {
             get
             {
@@ -82,7 +83,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad Puntuacion, permite leer y escribir el atributo
         /// </summary>
-        public float Puntuacion
+        public virtual float Puntuacion
         {
             get
             {
@@ -97,7 +98,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad Genero, permite leer y escribir el atributo
         /// </summary>
-        public string Genero
+        public virtual string Genero
         {
             get
             {

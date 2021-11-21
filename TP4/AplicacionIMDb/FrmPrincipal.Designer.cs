@@ -111,14 +111,14 @@ namespace AplicacionIMDb
             // listaPelículasToolStripMenuItem
             // 
             this.listaPelículasToolStripMenuItem.Name = "listaPelículasToolStripMenuItem";
-            this.listaPelículasToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.listaPelículasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listaPelículasToolStripMenuItem.Text = "Lista películas";
             this.listaPelículasToolStripMenuItem.Click += new System.EventHandler(this.listaPelículasToolStripMenuItem_Click);
             // 
             // listaSeriesToolStripMenuItem
             // 
             this.listaSeriesToolStripMenuItem.Name = "listaSeriesToolStripMenuItem";
-            this.listaSeriesToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.listaSeriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.listaSeriesToolStripMenuItem.Text = "Lista series";
             this.listaSeriesToolStripMenuItem.Click += new System.EventHandler(this.listaSeriesToolStripMenuItem_Click);
             // 
@@ -268,6 +268,7 @@ namespace AplicacionIMDb
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IMDb";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.menuStrip1.ResumeLayout(false);

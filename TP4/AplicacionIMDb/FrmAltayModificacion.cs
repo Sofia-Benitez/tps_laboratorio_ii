@@ -17,6 +17,11 @@ namespace AplicacionIMDb
         public Pelicula peliculaModificar;
         public Serie serieModificar;
         public Serie nuevaSerie;
+        public string nuevoTituloPelicula;
+        public int nuevoAñoPelicula;
+        public double nuevaDuracionPelicula;
+        public string nuevoGeneroPelicula;
+        public float nuevaPuntuacionPelicula;
 
         /// <summary>
         /// constructor que instancia el formulario con los atributos minimos que necesita 
@@ -181,7 +186,8 @@ namespace AplicacionIMDb
             }
             else
             {
-                Equipo equipoAgregar = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
+                Equipo equipoAgregar = new Equipo(0, director, escritor, new List<string> { actor1, actor2, actor3 });
+                
                 return nuevaPelicula = new Pelicula(0, titulo, añoNum, puntuacionNum, genero, equipoAgregar, duracionNum);
                
             }
@@ -224,11 +230,11 @@ namespace AplicacionIMDb
                 peliculaModificar.Equipo.Actores[0] = actor1;
                 peliculaModificar.Equipo.Actores[1] = actor2;
                 peliculaModificar.Equipo.Actores[2] = actor3;
-                peliculaModificar.Titulo = titulo;
-                peliculaModificar.AñoLanzamiento = int.Parse(año);
-                peliculaModificar.Duracion = double.Parse(duracion);
-                peliculaModificar.Genero = genero;
-                peliculaModificar.Puntuacion = float.Parse(puntuacion);
+                nuevoTituloPelicula = titulo;
+                nuevoAñoPelicula = int.Parse(año);
+                nuevaDuracionPelicula = double.Parse(duracion);
+                nuevoGeneroPelicula = genero;
+                nuevaPuntuacionPelicula = float.Parse(puntuacion);
                 if (peliculaModificar is not null)
                 {
                     return peliculaModificar;
@@ -267,7 +273,7 @@ namespace AplicacionIMDb
             }
             else
             {
-                Equipo equipoAgregar = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
+                Equipo equipoAgregar = new Equipo(0, director, escritor, new List<string> { actor1, actor2, actor3 });
                 
                 nuevaSerie = new Serie(0, titulo, añoNum, puntuacionNum, genero, equipoAgregar, temporadasNum, añoFinNum);
                 

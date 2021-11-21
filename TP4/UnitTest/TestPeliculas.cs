@@ -16,7 +16,7 @@ namespace UnitTest
         public void OperadorIgualIgual_DebeRetornarTrueSiDosPeliculasSonIguales()
         {
             // arrange
-            Equipo equipoTedLasso = new Equipo("Declan Lowney", "Brendan Hunt", new List<string> { "Brendan Hunt", "Jason Sudeikis", "Brett Goldstein" });
+            Equipo equipoTedLasso = new Equipo(0, "Declan Lowney", "Brendan Hunt", new List<string> { "Brendan Hunt", "Jason Sudeikis", "Brett Goldstein" });
 
             Pelicula pelicula1 = new Pelicula(0, "prueba", 2020, 0, "prueba", equipoTedLasso, 0);
             Pelicula pelicula2 = new Pelicula(0, "prueba", 2020, 0, "prueba", equipoTedLasso, 0);
@@ -32,7 +32,7 @@ namespace UnitTest
         public void OperadorIgualIgual_DebeRetornarFalseSiDosPeliculasNoSonIguales()
         {
             // arrange
-            Equipo equipoTedLasso = new Equipo("Declan Lowney", "Brendan Hunt", new List<string> { "Brendan Hunt", "Jason Sudeikis", "Brett Goldstein" });
+            Equipo equipoTedLasso = new Equipo(0, "Declan Lowney", "Brendan Hunt", new List<string> { "Brendan Hunt", "Jason Sudeikis", "Brett Goldstein" });
 
             Pelicula pelicula1 = new Pelicula(0, "prueba", 2020, 0, "prueba", equipoTedLasso, 0);
             Pelicula pelicula2 = new Pelicula(0, "prueba", 1992, 0, "prueba", equipoTedLasso, 0);

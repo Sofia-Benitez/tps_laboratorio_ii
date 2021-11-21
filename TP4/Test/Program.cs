@@ -59,61 +59,61 @@ namespace Test
             Console.Clear();
 
 
-            //Carga de pelicula manual
-            Console.WriteLine("------------Carga de datos de una película---------------");
-            Console.WriteLine("Nombre de la película:");
-            string titulo = Console.ReadLine();
-            Console.WriteLine("Año de lanzamiento:");
-            int año = int.Parse(Console.ReadLine());
-            Console.WriteLine("Puntuación:");
-            float puntuacion = float.Parse(Console.ReadLine());
-            Console.WriteLine("Género:");
-            string genero = Console.ReadLine();
-            Console.WriteLine("Director:");
-            string director = Console.ReadLine();
-            Console.WriteLine("Escritor:");
-            string escritor = Console.ReadLine();
-            Console.WriteLine("Actor 1:");
-            string actor1 = Console.ReadLine();
-            Console.WriteLine("Actor 2:");
-            string actor2 = Console.ReadLine();
-            Console.WriteLine("Actor 3:");
-            string actor3 = Console.ReadLine();
-            Console.WriteLine("Duración en minutos:");
-            double duracion = double.Parse(Console.ReadLine());
+            ////Carga de pelicula manual
+            //Console.WriteLine("------------Carga de datos de una película---------------");
+            //Console.WriteLine("Nombre de la película:");
+            //string titulo = Console.ReadLine();
+            //Console.WriteLine("Año de lanzamiento:");
+            //int año = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Puntuación:");
+            //float puntuacion = float.Parse(Console.ReadLine());
+            //Console.WriteLine("Género:");
+            //string genero = Console.ReadLine();
+            //Console.WriteLine("Director:");
+            //string director = Console.ReadLine();
+            //Console.WriteLine("Escritor:");
+            //string escritor = Console.ReadLine();
+            //Console.WriteLine("Actor 1:");
+            //string actor1 = Console.ReadLine();
+            //Console.WriteLine("Actor 2:");
+            //string actor2 = Console.ReadLine();
+            //Console.WriteLine("Actor 3:");
+            //string actor3 = Console.ReadLine();
+            //Console.WriteLine("Duración en minutos:");
+            //double duracion = double.Parse(Console.ReadLine());
 
-            Equipo equipo = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
-            Pelicula pelicula = new Pelicula(0, titulo, año, puntuacion, genero, equipo, duracion);
+            //Equipo equipo = new Equipo(director, escritor, new List<string> { actor1, actor2, actor3 });
+            //Pelicula pelicula = new Pelicula(0, titulo, año, puntuacion, genero, equipo, duracion);
 
-            imdb.AgregarContenido(pelicula);
-            Console.WriteLine("\n\nPelicula agregada correctamente\n");
+            //imdb.AgregarContenido(pelicula);
+            //Console.WriteLine("\n\nPelicula agregada correctamente\n");
 
-            Console.WriteLine(pelicula.ToString());
+            //Console.WriteLine(pelicula.ToString());
 
-            Console.WriteLine("-----------PRESIONE UNA TECLA PARA CONTINUAR-----------");
-            Console.ReadKey();
-            Console.Clear();
+            //Console.WriteLine("-----------PRESIONE UNA TECLA PARA CONTINUAR-----------");
+            //Console.ReadKey();
+            //Console.Clear();
 
-            Console.WriteLine("Base de datos actualizada\n");
-            ///muestra las peliculas incluyendo la agregada manualmente
-            foreach (Pelicula item in imdb.Peliculas)
-            {
-                Console.WriteLine(item);
-            }
+            //Console.WriteLine("Base de datos actualizada\n");
+            /////muestra las peliculas incluyendo la agregada manualmente
+            //foreach (Pelicula item in imdb.Peliculas)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
-            Console.WriteLine("-----------PRESIONE UNA TECLA PARA CONTINUAR-----------");
-            Console.ReadKey();
-            Console.Clear();
+            //Console.WriteLine("-----------PRESIONE UNA TECLA PARA CONTINUAR-----------");
+            //Console.ReadKey();
+            //Console.Clear();
 
-            //guardar en un nuevo archivo
-            Console.WriteLine("Guardando actualizaciones en basePeliculasActualizada.json");
-            string rutaNueva = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            rutaNueva = Path.Combine(rutaNueva, "basePeliculasActualizada.json");
-            puntoJsonPeliculas.GuardarComo(rutaNueva, imdb.Peliculas);
+            ////guardar en un nuevo archivo
+            //Console.WriteLine("Guardando actualizaciones en basePeliculasActualizada.json");
+            //string rutaNueva = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            //rutaNueva = Path.Combine(rutaNueva, "basePeliculasActualizada.json");
+            //puntoJsonPeliculas.GuardarComo(rutaNueva, imdb.Peliculas);
 
-            Console.WriteLine("-----------PRESIONE UNA TECLA PARA CONTINUAR-----------");
-            Console.ReadKey();
-            Console.Clear();
+            //Console.WriteLine("-----------PRESIONE UNA TECLA PARA CONTINUAR-----------");
+            //Console.ReadKey();
+            //Console.Clear();
 
             Console.WriteLine("-----------Estadisticas-----------");
 
@@ -126,8 +126,15 @@ namespace Test
             string pelisPost2000 = imdb.MostrarPeliculasEstrenadasDespuesDel2000();
             Console.WriteLine(pelisPost2000);
 
-
-
+            try
+            {
+                AccesoBD.Guardar(imdb.Peliculas[0]);
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("error exception");
+            }
+            
 
         }
     }

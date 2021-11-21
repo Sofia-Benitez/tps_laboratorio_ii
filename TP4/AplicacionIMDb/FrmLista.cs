@@ -11,12 +11,11 @@ using Entidades;
 
 namespace AplicacionIMDb
 {
-
+    
     public partial class FrmLista : Form
     {
         IMDb imdb;
         
-
         /// <summary>
         /// constructor del formulario. para instanciarlo debe recibir el tipo de dato que se mostrara (pelicula o serie) y el objeto del tipo IMDb que se instancio en le frm pricipal
         /// </summary>
@@ -38,13 +37,23 @@ namespace AplicacionIMDb
         /// <param name="e"></param>
         private void FrmLista_Load(object sender, EventArgs e)
         {
+            
             if (this.Text == "Películas")
             {
                 ActualizarDataSourcePeliculas();
                 btnEstadistica1.Text = "Películas de terror";
                 btnEstadistica2.Text = "Películas post 2000";
                 btnEstadistica3.Text = "Películas con puntuación mayor a 8";
+                btnEstadistica4.Text = "Películas comedia con puntuación menor a 7";
+                btnEstadistica5.Text = "Películas dirigidas por Stanley Kubrick";
                 btnVerTodas.Text = "Ver todas las películas";
+                lblCantidad.Show();
+                lblContadorPelis.Show();
+
+
+                Task hilo = Task.Run(ComprobarCambios);
+                imdb.EventoModificacion += NotificarModificacion;
+                
             }
             else
             {
@@ -53,6 +62,8 @@ namespace AplicacionIMDb
                 btnEstadistica2.Text = "Series comedia";
                 btnEstadistica3.Text = "Series completas";
                 btnVerTodas.Text = "Ver todas las series";
+                lblCantidad.Hide();
+                lblContadorPelis.Hide();
             }
 
 
@@ -76,7 +87,11 @@ namespace AplicacionIMDb
                 if (frmAltaModificacion.DialogResult == DialogResult.OK)
                 {
                     imdb.AgregarContenido(frmAltaModificacion.nuevaPelicula);
+                    frmAltaModificacion.nuevaPelicula.Equipo.Id = imdb.BuscarNuevoIDEquipo();
+                    imdb.Equipos.Add(frmAltaModificacion.nuevaPelicula.Equipo);
+
                     ActualizarDataSourcePeliculas();
+                    
                 }
             }
             else
@@ -110,6 +125,7 @@ namespace AplicacionIMDb
                 {
                     Pelicula pelicula = dataGridLista.SelectedRows[0].DataBoundItem as Pelicula;
                     imdb.Peliculas.Remove(pelicula);
+                  
                     ActualizarDataSourcePeliculas();
                 }
                 else
@@ -140,13 +156,15 @@ namespace AplicacionIMDb
                 if (this.Text == "Películas")
                 {
                     Pelicula pelicula = dataGridLista.SelectedRows[0].DataBoundItem as Pelicula;
+                    
+                    
                     FrmAltayModificacion frmAltaModificacion = new FrmAltayModificacion("Modificar película", "Película", "Modificar", pelicula);
 
                     frmAltaModificacion.ShowDialog();
 
                     if (frmAltaModificacion.DialogResult == DialogResult.OK)
                     {
-                        pelicula = frmAltaModificacion.peliculaModificar;
+                        imdb.ModificarPelicula(pelicula, frmAltaModificacion.nuevoTituloPelicula, frmAltaModificacion.nuevoAñoPelicula, frmAltaModificacion.nuevaPuntuacionPelicula, frmAltaModificacion.nuevaDuracionPelicula, frmAltaModificacion.nuevoGeneroPelicula);
                         ActualizarDataSourcePeliculas();
                     }
                 }
@@ -179,7 +197,7 @@ namespace AplicacionIMDb
         /// <param name="e"></param>
         private void btnVerTodas_Click(object sender, EventArgs e)
         {
-            lblResultado.Text = "";
+            rtbxResultados.Text = "";
             if (this.Text == "Películas")
             {
                 
@@ -209,14 +227,14 @@ namespace AplicacionIMDb
                 string resultado = imdb.MostrarPeliculasTerror();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.PeliculasTerror;
-                lblResultado.Text = resultado;
+                rtbxResultados.Text = resultado;
             }
             else
             {
                 int resultado = imdb.MostrarSeriesSinFinalizar();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.SeriesSinFinalizar;
-                lblResultado.Text = $"Cantidad de series que no han finalizado: {resultado.ToString()}";
+                rtbxResultados.Text = $"Cantidad de series que no han finalizado: {resultado.ToString()}";
             }
         }
 
@@ -236,14 +254,14 @@ namespace AplicacionIMDb
                 string resultado = imdb.MostrarPeliculasEstrenadasDespuesDel2000();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.Peliculas2000;
-                lblResultado.Text = resultado;
+                rtbxResultados.Text = resultado;
             }
             else
             {
                 int resultado = imdb.MostrarSeriesComedia();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.SeriesComedia;
-                lblResultado.Text = $"Cantidad de series de comedia: {resultado.ToString()}";
+                rtbxResultados.Text = $"Cantidad de series de comedia: {resultado.ToString()}";
             }
         }
 
@@ -263,16 +281,77 @@ namespace AplicacionIMDb
                 string resultado = imdb.MostrarPeliculasConMasDe8Puntos();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.PeliculasMás8Puntos;
-                lblResultado.Text =resultado;
+                rtbxResultados.Text =resultado;
             }
             else
             {
                 int resultado = imdb.MostrarSeriesCompletas();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.SeriesCompletas;
-                lblResultado.Text = $"Cantidad de series completas: {resultado.ToString()}";
+                rtbxResultados.Text = $"Cantidad de series completas: {resultado.ToString()}";
             }
         }
+
+        private void btnEstadistica4_Click(object sender, EventArgs e)
+        {
+            dataGridLista.DataSource = null;
+            imdb.PeliculasComediaMalPuntuadas.Clear();
+            
+
+            if (this.Text == "Películas")
+            {
+                string resultado = imdb.MostrarPeliculasComediaPeorPuntuadas();
+                dataGridLista.DataSource = null;
+                dataGridLista.DataSource = imdb.PeliculasComediaMalPuntuadas;
+                rtbxResultados.Text = resultado;
+            }
+            else
+            {
+
+            }
+
+        }
+
+        private void btnEstadistica5_Click(object sender, EventArgs e)
+        {
+            dataGridLista.DataSource = null;
+            imdb.PeliculasKubrik.Clear();
+
+
+            if (this.Text == "Películas")
+            {
+                string resultado = imdb.MostrarPeliculasDirigidasPorStanleyKubrick();
+                dataGridLista.DataSource = null;
+                dataGridLista.DataSource = imdb.PeliculasKubrik;
+                rtbxResultados.Text = resultado;
+            }
+            else
+            {
+
+            }
+        }
+
+        private void btnMostrarEstadisticas_Click(object sender, EventArgs e)
+        {
+            if (this.Text == "Películas")
+            {
+                imdb.Peliculas2000.Clear();
+                imdb.PeliculasMás8Puntos.Clear();
+                imdb.PeliculasTerror.Clear();
+                imdb.PeliculasComediaMalPuntuadas.Clear();
+                imdb.PeliculasKubrik.Clear();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(imdb.MostrarPeliculasConMasDe8Puntos());
+                sb.AppendLine(imdb.MostrarPeliculasEstrenadasDespuesDel2000());
+                sb.AppendLine(imdb.MostrarPeliculasTerror());
+                sb.AppendLine(imdb.MostrarPeliculasComediaPeorPuntuadas());
+                sb.AppendLine(imdb.MostrarPeliculasDirigidasPorStanleyKubrick());
+
+                MessageBox.Show(sb.ToString(), "Estadísticas", MessageBoxButtons.OK);
+            }
+                
+        }
+
 
         /// <summary>
         /// Metodo que actualiza el datagrid de las peliculas con la propiedad Peliculas de la clase IMDb
@@ -293,7 +372,39 @@ namespace AplicacionIMDb
         }
 
 
-       
+
+        private void ComprobarCambios()
+        {
+            while(true)
+            {
+                if(imdb.Peliculas.Count().ToString() != lblContadorPelis.Text)
+                { 
+                    ActualizarContadorPeliculas();
+                }
+            }
+        }
+        private void ActualizarContadorPeliculas()
+        {
+
+            if (InvokeRequired)
+            {
+                Action delegado = ActualizarContadorPeliculas;
+                Invoke(delegado);
+            }
+            else
+            {
+                lblContadorPelis.Text = imdb.Peliculas.Count().ToString();
+            }
+        }
+
+        /// <summary>
+        /// metodo del evento
+        /// </summary>
+        /// <param name="mensaje"></param>
+        public void NotificarModificacion(string mensaje)
+        {
+            MessageBox.Show(mensaje);
+        }
 
         
     }
