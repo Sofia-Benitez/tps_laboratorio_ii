@@ -4,12 +4,10 @@ using System.Text;
 
 namespace Entidades
 {
-    public delegate void DelegadoMensajeModificacion(string msg);
+    
     public class Pelicula : ContenidoAudiovisual
     {
         private double duracion;
-        public event DelegadoMensajeModificacion EventoModificacion;
-
 
         /// <summary>
         /// Constructor de la clase Pelicula

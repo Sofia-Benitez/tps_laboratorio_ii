@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
@@ -15,7 +16,8 @@ namespace AplicacionIMDb
     public partial class FrmLista : Form
     {
         IMDb imdb;
-        
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
         /// <summary>
         /// constructor del formulario. para instanciarlo debe recibir el tipo de dato que se mostrara (pelicula o serie) y el objeto del tipo IMDb que se instancio en le frm pricipal
         /// </summary>
@@ -26,7 +28,7 @@ namespace AplicacionIMDb
             InitializeComponent();
             this.Text = tipo;
             this.imdb = baseDatos;
-
+           
         }
 
         /// <summary>
@@ -44,14 +46,13 @@ namespace AplicacionIMDb
                 btnEstadistica1.Text = "Películas de terror";
                 btnEstadistica2.Text = "Películas post 2000";
                 btnEstadistica3.Text = "Películas con puntuación mayor a 8";
-                btnEstadistica4.Text = "Películas comedia con puntuación menor a 7";
+                btnEstadistica4.Text = "Películas comedia";
                 btnEstadistica5.Text = "Películas dirigidas por Stanley Kubrick";
                 btnVerTodas.Text = "Ver todas las películas";
                 lblCantidad.Show();
-                lblContadorPelis.Show();
 
-
-                Task hilo = Task.Run(ComprobarCambios);
+                CancellationToken cancelationToken = cancellationTokenSource.Token;
+                Task hilo = Task.Run(ComprobarCambios, cancelationToken);
                 imdb.EventoModificacion += NotificarModificacion;
                 
             }
@@ -61,9 +62,11 @@ namespace AplicacionIMDb
                 btnEstadistica1.Text = "Series no finalizadas";
                 btnEstadistica2.Text = "Series comedia";
                 btnEstadistica3.Text = "Series completas";
+                btnEstadistica4.Text = "Series con Jennifer Aniston";
+                btnEstadistica5.Text = "Series drama";
                 btnVerTodas.Text = "Ver todas las series";
                 lblCantidad.Hide();
-                lblContadorPelis.Hide();
+                lblCantidad.Hide();
             }
 
 
@@ -219,8 +222,6 @@ namespace AplicacionIMDb
         private void btnEstadistica1_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            imdb.PeliculasTerror.Clear();
-            imdb.SeriesSinFinalizar.Clear();
 
             if (this.Text == "Películas")
             {
@@ -231,10 +232,10 @@ namespace AplicacionIMDb
             }
             else
             {
-                int resultado = imdb.MostrarSeriesSinFinalizar();
+                string resultado = imdb.MostrarSeriesSinFinalizar();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.SeriesSinFinalizar;
-                rtbxResultados.Text = $"Cantidad de series que no han finalizado: {resultado.ToString()}";
+                rtbxResultados.Text = resultado;
             }
         }
 
@@ -247,8 +248,7 @@ namespace AplicacionIMDb
         private void btnEstadistica2_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            imdb.Peliculas2000.Clear();
-            imdb.SeriesComedia.Clear();
+            
             if (this.Text == "Películas")
             {
                 string resultado = imdb.MostrarPeliculasEstrenadasDespuesDel2000();
@@ -258,10 +258,10 @@ namespace AplicacionIMDb
             }
             else
             {
-                int resultado = imdb.MostrarSeriesComedia();
+                string resultado = imdb.MostrarSeriesComedia();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.SeriesComedia;
-                rtbxResultados.Text = $"Cantidad de series de comedia: {resultado.ToString()}";
+                rtbxResultados.Text = resultado;
             }
         }
 
@@ -274,8 +274,7 @@ namespace AplicacionIMDb
         private void btnEstadistica3_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            imdb.PeliculasMás8Puntos.Clear();
-            imdb.SeriesCompletas.Clear();
+            
             if (this.Text == "Películas")
             {
                 string resultado = imdb.MostrarPeliculasConMasDe8Puntos();
@@ -285,29 +284,30 @@ namespace AplicacionIMDb
             }
             else
             {
-                int resultado = imdb.MostrarSeriesCompletas();
+                string resultado = imdb.MostrarSeriesCompletas();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.SeriesCompletas;
-                rtbxResultados.Text = $"Cantidad de series completas: {resultado.ToString()}";
+                rtbxResultados.Text = resultado;
             }
         }
 
         private void btnEstadistica4_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            imdb.PeliculasComediaMalPuntuadas.Clear();
             
-
             if (this.Text == "Películas")
             {
-                string resultado = imdb.MostrarPeliculasComediaPeorPuntuadas();
+                string resultado = imdb.MostrarPeliculasComedia();
                 dataGridLista.DataSource = null;
                 dataGridLista.DataSource = imdb.PeliculasComediaMalPuntuadas;
                 rtbxResultados.Text = resultado;
             }
             else
             {
-
+                string resultado = imdb.MostrarSeriesConJenniferAniston();
+                dataGridLista.DataSource = null;
+                dataGridLista.DataSource = imdb.SeriesConJenniferAniston;
+                rtbxResultados.Text = resultado;
             }
 
         }
@@ -315,8 +315,7 @@ namespace AplicacionIMDb
         private void btnEstadistica5_Click(object sender, EventArgs e)
         {
             dataGridLista.DataSource = null;
-            imdb.PeliculasKubrik.Clear();
-
+            
 
             if (this.Text == "Películas")
             {
@@ -327,25 +326,35 @@ namespace AplicacionIMDb
             }
             else
             {
-
+                string resultado = imdb.MostrarSeriesDrama();
+                dataGridLista.DataSource = null;
+                dataGridLista.DataSource = imdb.SeriesDrama;
+                rtbxResultados.Text = resultado;
             }
         }
 
         private void btnMostrarEstadisticas_Click(object sender, EventArgs e)
         {
+            StringBuilder sb = new StringBuilder();
             if (this.Text == "Películas")
             {
-                imdb.Peliculas2000.Clear();
-                imdb.PeliculasMás8Puntos.Clear();
-                imdb.PeliculasTerror.Clear();
-                imdb.PeliculasComediaMalPuntuadas.Clear();
-                imdb.PeliculasKubrik.Clear();
-                StringBuilder sb = new StringBuilder();
+               
                 sb.AppendLine(imdb.MostrarPeliculasConMasDe8Puntos());
                 sb.AppendLine(imdb.MostrarPeliculasEstrenadasDespuesDel2000());
                 sb.AppendLine(imdb.MostrarPeliculasTerror());
-                sb.AppendLine(imdb.MostrarPeliculasComediaPeorPuntuadas());
+                sb.AppendLine(imdb.MostrarPeliculasComedia());
                 sb.AppendLine(imdb.MostrarPeliculasDirigidasPorStanleyKubrick());
+
+                MessageBox.Show(sb.ToString(), "Estadísticas", MessageBoxButtons.OK);
+            }
+            else
+            {
+                
+                sb.AppendLine(imdb.MostrarSeriesComedia());
+                sb.AppendLine(imdb.MostrarSeriesCompletas());
+                sb.AppendLine(imdb.MostrarSeriesDrama());
+                sb.AppendLine(imdb.MostrarSeriesSinFinalizar());
+                sb.AppendLine(imdb.MostrarSeriesConJenniferAniston());
 
                 MessageBox.Show(sb.ToString(), "Estadísticas", MessageBoxButtons.OK);
             }
@@ -375,9 +384,9 @@ namespace AplicacionIMDb
 
         private void ComprobarCambios()
         {
-            while(true)
+            while(true && !cancellationTokenSource.IsCancellationRequested)
             {
-                if(imdb.Peliculas.Count().ToString() != lblContadorPelis.Text)
+                if(imdb.Peliculas.Count().ToString() != lblCantidad.Text)
                 { 
                     ActualizarContadorPeliculas();
                 }
@@ -393,7 +402,7 @@ namespace AplicacionIMDb
             }
             else
             {
-                lblContadorPelis.Text = imdb.Peliculas.Count().ToString();
+                lblCantidad.Text = $"Cantidad total de películas: {imdb.Peliculas.Count().ToString()}";
             }
         }
 
@@ -406,6 +415,15 @@ namespace AplicacionIMDb
             MessageBox.Show(mensaje);
         }
 
-        
+        /// <summary>
+        /// Evento que se ejecuta cuando se esta cerrando el formulario. Cancela el hilo y muestra un mensaje
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmLista_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cancellationTokenSource.Cancel();
+            MessageBox.Show("Volver al inicio");
+        }
     }
 }

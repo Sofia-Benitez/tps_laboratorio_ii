@@ -82,6 +82,7 @@ namespace AplicacionIMDb
             // 
             // cbxGenero
             // 
+            this.cbxGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxGenero.FormattingEnabled = true;
             this.cbxGenero.Items.AddRange(new object[] {
             "Comedia",
