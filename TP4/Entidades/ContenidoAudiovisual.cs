@@ -53,7 +53,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad Titulo, permite leer y escribir el atributo
         /// </summary>
-        public virtual string Titulo
+        public  string Titulo
         {
             get
             {
@@ -68,7 +68,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad AñoLanzamiento, permite leer y escribir el atributo
         /// </summary>
-        public virtual int AñoLanzamiento
+        public  int AñoLanzamiento
         {
             get
             {
@@ -83,7 +83,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad Puntuacion, permite leer y escribir el atributo
         /// </summary>
-        public virtual float Puntuacion
+        public float Puntuacion
         {
             get
             {
@@ -98,7 +98,7 @@ namespace Entidades
         /// <summary>
         /// Propiedad Genero, permite leer y escribir el atributo
         /// </summary>
-        public virtual string Genero
+        public  string Genero
         {
             get
             {

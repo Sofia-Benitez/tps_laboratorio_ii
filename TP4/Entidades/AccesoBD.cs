@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class AccesoBD
+    public static class AccesoBD
     {
         static string connectionString;
         static SqlCommand command;
         static SqlConnection connection;
 
+        /// <summary>
+        /// constructor estático que genera la  conexión con la base de datos correspondiente
+        /// </summary>
         static AccesoBD()
         {
             connectionString = @"Server=.;Database=imdb;Trusted_Connection=True;";
@@ -22,6 +25,12 @@ namespace Entidades
             command.CommandType = System.Data.CommandType.Text;
         }
 
+        /// <summary>
+        /// Método que permite insertar los datos de una pelicula en una base de datos 
+        /// En la tabla equipo ingresa los datos del equipo y en la tabla pelicula los correspondientes a la
+        /// pelicula. Si no se puede acceder a la base de datos lanza una excepcion 
+        /// </summary>
+        /// <param name="pelicula"></param>
         public static void Guardar(Pelicula pelicula)
         {
             try

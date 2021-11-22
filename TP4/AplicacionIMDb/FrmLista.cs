@@ -53,6 +53,7 @@ namespace AplicacionIMDb
 
                 CancellationToken cancelationToken = cancellationTokenSource.Token;
                 Task hilo = Task.Run(ComprobarCambios, cancelationToken);
+
                 imdb.EventoModificacion += NotificarModificacion;
                 
             }
@@ -381,7 +382,10 @@ namespace AplicacionIMDb
         }
 
 
-
+        /// <summary>
+        /// Metodo que itera mientras no se hayan cancelado los token
+        /// Si el contador de peliculas difiere a lo que se muestra en el control llama al metodo ActualizarContadorPeliculas();
+        /// </summary>
         private void ComprobarCambios()
         {
             while(true && !cancellationTokenSource.IsCancellationRequested)
@@ -392,6 +396,11 @@ namespace AplicacionIMDb
                 }
             }
         }
+
+        /// <summary>
+        /// permite modificar el control que muestra la cantidad total de películas al momento. 
+        /// Mediante InvokeRequired se puede invocar al delegado si se esta en un hilo distinto al que creo el formulario
+        /// </summary>
         private void ActualizarContadorPeliculas()
         {
 

@@ -11,6 +11,7 @@ namespace Entidades
     public class IMDb
     {
         public event DelegadoMensajeModificacion EventoModificacion;
+
         private List<Pelicula> peliculas;
         private List<Serie> series;
         private List<Equipo> equipos;
@@ -80,6 +81,10 @@ namespace Entidades
                 this.series = value;
             }
         }
+
+        /// <summary>
+        /// prpiedad de lectura que devuelve la cantidad de elementos de la lista
+        /// </summary>
         public int CantidadDePeliculas
         {
             get
@@ -88,6 +93,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// prpiedad de lectura que devuelve la cantidad de elementos de la lista
+        /// </summary>
         public int CantidadDeSeries
         {
             get
@@ -118,7 +126,6 @@ namespace Entidades
         {
             int nuevoID;
             
-
             foreach (Pelicula item in peliculas)
             {
                 if(nuevaPelicula == item)
@@ -143,20 +150,6 @@ namespace Entidades
 
         }
 
-        public int BuscarNuevoIDEquipo()
-        {
-            int nuevoID;
-            if (this.equipos.Count == 0)
-            {
-                nuevoID = 1;
-            }
-            else
-            {
-                nuevoID = this.equipos[equipos.Count - 1].Id + 1;
-            }
-
-            return nuevoID;
-        }
 
         /// <summary>
         /// Sobrecarga del método AgregarContenido() para agregar una serie a la lista de series
@@ -190,6 +183,25 @@ namespace Entidades
             this.series.Add(nuevaSerie);
             return true;
 
+        }
+        
+        /// <summary>
+        /// Metodo que busca el proximo ID a asignarle a un equipo 
+        /// </summary>
+        /// <returns></returns>
+        public int BuscarNuevoIDEquipo()
+        {
+            int nuevoID;
+            if (this.equipos.Count == 0)
+            {
+                nuevoID = 1;
+            }
+            else
+            {
+                nuevoID = this.equipos[equipos.Count - 1].Id + 1;
+            }
+
+            return nuevoID;
         }
 
         /// <summary>
@@ -236,11 +248,12 @@ namespace Entidades
         //ESTADISTICAS
 
         /// <summary>
-        /// metodo que recorre la lista de series y agrega a una lista del formulario actual los elementos que no esten repetidos.
+        /// metodo que recorre la lista de series y agrega a una lista nueva los elementos que no esten repetidos.
         /// cada vez que agrega un elemento suma una unidad a un contador
         /// solo agrega las series que no hayan finalizado, es decir que su año de finalizaccion este en su valor por default
+        /// cuenta la cantidad de estas series que tiene puntaje mayor a 8 y calcula los porcentajes de estos datos 
         /// </summary>
-        /// <returns>Devuelve la cantidad de series agregadas a la lista</returns>
+        /// <returns>Devuelve un string con la cantidad de series que cumplen el criterio </returns>
         public string MostrarSeriesSinFinalizar()
         {
             StringBuilder sb = new  StringBuilder();
@@ -268,7 +281,6 @@ namespace Entidades
                 porcentajeMas8 = contadorPuntajeMas8 * 100 / contadorSeries;
                 sb.AppendLine($"Cantidad de series sin finalizar: {contadorSeries} - {porcentajeSinFinalizar}% del total");
                 sb.AppendLine($"{contadorPuntajeMas8} tienen puntaje superior a 8. El %{porcentajeMas8} de las series en emisión");
-                 
             }
             else
             {
@@ -279,11 +291,12 @@ namespace Entidades
         }
 
         /// <summary>
-        /// metodo que recorre la lista de series y agrega a una lista del formulario actual los elementos que no esten repetidos.
+        /// metodo que recorre la lista de series y agrega a una lista nueva los elementos que no esten repetidos.
         /// cada vez que agrega un elemento suma una unidad a un contador
         /// solo agrega las series hayan finalizado, es decir que su año de finalizaccion sea distinto a su valor por default
+        /// Cuenta la cantidad de estas series con mas de 5 temporadas y calcula porcentajes de estos datos
         /// </summary>
-        /// <returns>Devuelve la cantidad de series agregadas a la lista</returns>
+        /// <returns>Devuelve un string con un mensaje con los datos recolectados</returns>
         public string MostrarSeriesCompletas()
         {
             StringBuilder sb = new StringBuilder();
@@ -324,11 +337,12 @@ namespace Entidades
         }
 
         /// <summary>
-        /// metodo que recorre la lista de series y agrega a una lista del formulario actual los elementos que no esten repetidos.
+        /// metodo que recorre la lista de series y agrega a una lista  los elementos que no esten repetidos.
         /// cada vez que agrega un elemento suma una unidad a un contador
         /// solo agrega las series cuyo género sea Comedia
+        /// cuenta las series de esta lista que se hayan estrenado en los ultimos años y calcula los porcentajes de estos datos
         /// </summary>
-        /// <returns>Devuelve la cantidad de series agregadas a la lista</returns>
+        /// <returns>Devuelve un string con un mensaje con los datos recolectados</returns>
         public string MostrarSeriesComedia()
         {
             StringBuilder sb = new StringBuilder();
@@ -371,7 +385,7 @@ namespace Entidades
         /// Metodo que recorre las peliculas y agrega a una lista las que tienen a Jennifer Aniston de actriz
         /// Calcula el porcentaje de estas sobre el total
         /// </summary>
-        /// <returns>devuelve un string con la infromacion obtenida</returns>
+        /// <returns>Devuelve un string con un mensaje con los datos recolectados</returns>
         public string MostrarSeriesConJenniferAniston()
         {
             StringBuilder sb = new StringBuilder();
@@ -401,7 +415,6 @@ namespace Entidades
 
                 sb.AppendLine($"Cantidad de series en las que actua Jennifer Aniston: {contadorSeries} - {porcentajeSeriesJennifer}% del total");
                
-
             }
             else
             {
@@ -410,6 +423,11 @@ namespace Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// recorre las series de la lista y agrega a una nueva lista las que sean de genero drama. las cuenta 
+        /// y cuenta cuantas de estas tienen puntaje menor a 7. Calcula los porcentajes de estos datos
+        /// </summary>
+        /// <returns>Devuelve un string con un mensaje con los datos recolectados</returns>
         public string MostrarSeriesDrama()
         {
             StringBuilder sb = new StringBuilder();
@@ -449,11 +467,13 @@ namespace Entidades
         }
 
         /// <summary>
-        /// metodo que recorre la lista de peliculas y agrega a una lista del formulario actual los elementos que no esten repetidos.
+        /// metodo que recorre la lista de peliculas y agrega la lista peliculasTerror los elementos que no esten repetidos.
         /// cada vez que agrega un elemento suma una unidad a un contador
         /// solo agrega las películas cuyo genero sea Terror
+        /// de estas peliculas cuenta las que tienen puntaje mayor a 8 y las que se estrenaron antes del año 2000
+        /// calcula los porcentajes de esos datos 
         /// </summary>
-        /// <returns>Devuelve la cantidad de peliculas agregadas a la lista</returns>
+        /// <returns>Devuelve un string con un mensaje con los datos recolectados</returns>
         public string MostrarPeliculasTerror()
         {
             StringBuilder sb = new StringBuilder();
@@ -461,9 +481,9 @@ namespace Entidades
             int contadorPeliculas = 0;
             int contadorMas8 = 0;
             int contadorAntes2000 = 0;
-            int porcentajeTerror = 0;
-            int porcentajeMas8 = 0;
-            int porcentajeAntes2000 = 0;
+            int porcentajeTerror;
+            int porcentajeMas8;
+            int porcentajeAntes2000;
             foreach (Pelicula item in this.Peliculas)
             {
                 if (item.Genero == "Terror" && !(this.peliculasTerror.Contains(item)))
@@ -501,11 +521,15 @@ namespace Entidades
         }
 
         /// <summary>
-        /// metodo que recorre la lista de peliculas y agrega a una lista del formulario actual los elementos que no esten repetidos.
+        /// metodo que recorre la lista de peliculas y agrega a la lista peliculas2000 los elementos que no esten repetidos.
         /// cada vez que agrega un elemento suma una unidad a un contador
-        /// solo agrega las películas estrenadas despues del año 2000, es decir que su año de lanzamiento sea mayor o igual a 2000
-        /// </summary>
-        /// <returns>Devuelve la cantidad de peliculas agregadas a la lista</returns>
+        /// solo agrega las películas estrenadas despues del año 2000
+        /// calcula el porcentaje de estas peliculas sobre el total
+        /// ordena la lista por puntaje utilizando .Sort() con una expresión lambda que utiliza el metodo de extension
+        /// de float CompararSiEsMenor().
+        /// 
+        ///  </summary>
+        /// <returns>Devuelve un string con la cantidad de peliculas que cumplen el criterio, el porcentaje y la mejor puntuada</returns>
         public string MostrarPeliculasEstrenadasDespuesDel2000()
         {
             peliculas2000.Clear();
@@ -521,7 +545,8 @@ namespace Entidades
                     contadorPeliculas++;
                 }
             }
-            peliculas2000.Sort(PeliculaMejorPuntuada);
+
+            peliculas2000.Sort((Pelicula p1, Pelicula p2) => p1.Puntuacion.CompararSiEsMenor(p2.Puntuacion));
            
             if (this.peliculas.Any() && peliculas2000.Any())
             {
@@ -538,37 +563,16 @@ namespace Entidades
             
         }
 
-        /// <summary>
-        /// metodo que permite comparar peliculas por su puntuacion para usar en Sort()
-        /// </summary>
-        /// <param name="pelicula1"></param>
-        /// <param name="pelicula2"></param>
-        /// <returns></returns>
-        public int PeliculaMejorPuntuada(Pelicula pelicula1, Pelicula pelicula2)
-        {
 
-            if (pelicula2.Puntuacion > pelicula1.Puntuacion)
-            {
-                return 1;
-            }
-            else if (pelicula2.Puntuacion < pelicula1.Puntuacion)
-            {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
-                
-            
-        }
 
         /// <summary>
-        /// metodo que recorre la lista de peliculas y agrega a una lista del formulario actual los elementos que no esten repetidos.
+        /// metodo que recorre la lista de peliculas y agrega a la lista peliculasMás8Puntos los elementos que no esten repetidos.
         /// cada vez que agrega un elemento suma una unidad a un contador
         /// solo agrega las películas cuyo puntaje sea mayor o igual a 8
+        /// de estas peliculas cuenta cuantas duran mas de 2 hs 
+        /// calcula los porcentajes de estos datos 
         /// </summary>
-        /// <returns>Devuelve la cantidad de peliculas agregadas a la lista</returns>
+        /// <returns>Devuelve un string con los datos recolectados</returns>
         public string MostrarPeliculasConMasDe8Puntos()
         {
             StringBuilder sb = new StringBuilder();
@@ -605,7 +609,14 @@ namespace Entidades
 
         }
 
-
+        /// <summary>
+        /// recorre la lista de peliculas y agrega a la lista peliculasComedia las peliculas cuyo genero sea comedia o comedia romántica
+        /// aumenta el contador cada vez que una cumple con el criterio
+        /// de estas peliculas cuenta cuantas tienen menos de 7 puntos y cuantas se estrenaron entre 1999 y 2010
+        /// calcula el porcentaje de peliculas de comedia del total y de peliculas de esa epoca y con menos de 7 puntos sobre las peliculas de comedia
+        /// 
+        /// </summary>
+        /// <returns>Devuelve un string con los datos recolectados</returns>
         public string MostrarPeliculasComedia()
         {
             StringBuilder sb = new StringBuilder();
@@ -650,7 +661,13 @@ namespace Entidades
             return sb.ToString();
         }
 
-
+        /// <summary>
+        /// Recorre la lista de peliculas y las que tienen como director a Stanley Kubrick son agregadas a una lista
+        ///  aumenta un contador cada vez que se agrega una y calcula el porcentaje de estas sobre el total de películas
+        ///  ordena las peliculas de la nueva lista por puntuacion utilizando el metodo Sort y una expresion lamdba con la extension de float 
+        ///  para obtener la pelicula mejor puntuada
+        /// </summary>
+        /// <returns>muestra un string con la cantidad de peliculas dirigidas por el director, el porcentaje sobre el total y la pelicula mejor puntuada</returns>
         public string MostrarPeliculasDirigidasPorStanleyKubrick()
         {
             StringBuilder sb = new StringBuilder();
@@ -666,7 +683,7 @@ namespace Entidades
                 }
             }
 
-            peliculasKubrick.Sort(PeliculaMejorPuntuada);
+            peliculasKubrick.Sort((Pelicula p1, Pelicula p2)=> p1.Puntuacion.CompararSiEsMenor(p2.Puntuacion));
             
             
             if (this.peliculas.Any() && peliculasKubrick.Any())

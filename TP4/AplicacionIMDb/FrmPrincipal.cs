@@ -15,7 +15,7 @@ namespace AplicacionIMDb
     public partial class FrmPrincipal : Form
     {
         IMDb imdb = new IMDb();
-
+       
         private OpenFileDialog openFileDialog;
         private SaveFileDialog saveFileDialog;
         private string ultimoArchivo;
@@ -337,7 +337,8 @@ namespace AplicacionIMDb
 
         /// <summary>
         /// Cuando se cierra el formulario principal si hay peliculas cargadas un mensaje permite elegir al usuario si guardar o no la lsta en una base de datos
-        /// Si selecciona YES el programa guarda todas las peliculas en una base de datos y cierra el programa. 
+        /// Si selecciona YES el programa guarda todas las peliculas en una base de datos utilizando el metodo Guardar de la clase AccesoDB
+        /// y cierra el programa. 
         /// Si las peliculas ya estan cargadas no las guarda. 
         /// </summary>
         /// <param name="sender"></param>
@@ -371,12 +372,6 @@ namespace AplicacionIMDb
             {
                 MessageBox.Show("Adiós");
             }
-
-
-
-
-
-
 
 
         }
