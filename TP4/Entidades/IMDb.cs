@@ -527,7 +527,7 @@ namespace Entidades
         /// calcula el porcentaje de estas peliculas sobre el total
         /// ordena la lista por puntaje utilizando .Sort() con una expresión lambda que utiliza el metodo de extension
         /// de float CompararSiEsMenor().
-        /// 
+        /// cuenta la cantidad de estas peliculas con puntuacion mayor a 7 y la cantidad con puntuacion menor
         ///  </summary>
         /// <returns>Devuelve un string con la cantidad de peliculas que cumplen el criterio, el porcentaje y la mejor puntuada</returns>
         public string MostrarPeliculasEstrenadasDespuesDel2000()
@@ -535,6 +535,8 @@ namespace Entidades
             peliculas2000.Clear();
             int contadorPeliculas = 0;
             int porcentaje2000;
+            int contadorPeoresPuntuadas = 0;
+            int contadorMejoresPuntuadas = 0;
             StringBuilder sb = new StringBuilder();
 
             foreach (Pelicula item in this.Peliculas)
@@ -543,6 +545,14 @@ namespace Entidades
                 {
                     this.peliculas2000.Add(item);
                     contadorPeliculas++;
+                    if(item.Puntuacion<7)
+                    {
+                        contadorPeoresPuntuadas++;
+                    }
+                    else
+                    {
+                        contadorMejoresPuntuadas++;
+                    }
                 }
             }
 
@@ -552,6 +562,8 @@ namespace Entidades
             {
                 porcentaje2000 = contadorPeliculas * 100 / this.CantidadDePeliculas;
                 sb.AppendLine($"Cantidad de peliculas estrenadas despues del 2000: {contadorPeliculas} - {porcentaje2000}% del total");
+                sb.AppendLine($"De estas películas: {contadorPeoresPuntuadas} tienen un puntaje menor a 7");
+                sb.AppendLine($"{contadorMejoresPuntuadas} tienen puntaje mayor a 7");
                 sb.AppendLine($"Pelicula mejor puntuada: {peliculas2000[0].Titulo}. Puntaje: {peliculas2000[0].Puntuacion}");
             }
             else
@@ -580,7 +592,11 @@ namespace Entidades
             int contadorPeliculas = 0;
             int porcentajePelisMas8;
             int contadorMas120Min = 0;
-            int porcentajeMas120Min; 
+            int porcentajeMas120Min;
+            int contadorComedia = 0;
+            int contadorFantasia = 0;
+            int contadorTerror = 0;
+            int contadorDrama = 0;
             foreach (Pelicula item in this.Peliculas)
             {
                 if (item.Puntuacion >= 8 && !(this.peliculasMás8Puntos.Contains(item)))
@@ -591,6 +607,21 @@ namespace Entidades
                     {
                         contadorMas120Min++;
                     }
+                    switch(item.Genero)
+                    {
+                        case "Comedia":
+                            contadorComedia++;
+                            break;
+                        case "Drama":
+                            contadorDrama++;
+                            break;
+                        case "Terror":
+                            contadorTerror++;
+                            break;
+                        case "Fantástico":
+                            contadorFantasia++;
+                            break;
+                    }
                 }
             }
             if (this.peliculas.Any() && this.peliculasMás8Puntos.Any())
@@ -598,6 +629,9 @@ namespace Entidades
                 porcentajePelisMas8 = contadorPeliculas * 100 / this.CantidadDePeliculas;
                 porcentajeMas120Min = contadorMas120Min * 100 / contadorPeliculas;
                 sb.AppendLine($"Cantidad de peliculas con puntuación mayor a 8: {contadorPeliculas} - %{porcentajePelisMas8} del total");
+                sb.AppendLine($"Cantidad de películas bien puntuadas según género: ");
+                sb.AppendLine($"Comedia: {contadorComedia} - Fantástico: {contadorFantasia}");
+                sb.AppendLine($"Terror: {contadorTerror} - Drama: {contadorDrama}");
                 sb.AppendLine($"{contadorMas120Min} duran dos horas o más, el %{porcentajeMas120Min} de estas películas.");
             }
             else
