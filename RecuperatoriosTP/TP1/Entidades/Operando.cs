@@ -10,21 +10,35 @@ namespace Entidades
     {
         private double numero;
 
+        /// <summary>
+        /// Constructor que inicializa el atributo numero en 0
+        /// </summary>
         public Operando():this(0)
         {
             
         }
 
+        /// <summary>
+        /// constructor que recibe un numero en string y lo asigna mediante la propiedad Numero
+        /// </summary>
+        /// <param name="strNumero"></param>
         public Operando(string strNumero)
         {
             this.Numero = strNumero;
         }
 
+        /// <summary>
+        /// Constructor que recibe un double y lo asigna al atributo numero
+        /// </summary>
+        /// <param name="numero"></param>
         public Operando(double numero)
         {
             this.numero = numero;
         }
 
+        /// <summary>
+        /// propiedad numero permite asignarle valor al atributo numero utilizando el metodo ValidarOperando();
+        /// </summary>
         private string Numero
         {
             set
@@ -37,7 +51,7 @@ namespace Entidades
 
 
         /// <summary>
-        /// Parsea un string y si es una cadena de numeros devuelve el numero en double, si no lo es devuelve 0
+        /// Metodo que parsea un string y si es una cadena de numeros devuelve el numero en double, si no lo es devuelve 0
         /// </summary>
         /// <param name="strNumero">cadena a analizar</param>
         /// <returns></returns>

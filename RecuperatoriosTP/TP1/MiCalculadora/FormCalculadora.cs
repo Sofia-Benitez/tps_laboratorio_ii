@@ -18,7 +18,11 @@ namespace MiCalculadora
             InitializeComponent();
         }
 
-        
+        /// <summary>
+        /// Se agregan los operadores al combobox y llama al metodo limpiar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormCalculadora_Load(object sender, EventArgs e)
         {
             cmbOperador.Items.Add(" ");
@@ -28,6 +32,9 @@ namespace MiCalculadora
             cmbOperador.Items.Add("*");
             Limpiar();
         }
+        /// <summary>
+        /// metodo que setea todos los textbox y combobox en blanco
+        /// </summary>
         private void Limpiar()
         {
             txtNumero1.Text = " ";
@@ -37,7 +44,8 @@ namespace MiCalculadora
         }
 
         /// <summary>
-        /// 
+        /// metodo que instancia  los operandos y el operador y realiza la operacion 
+        /// mediante el metodo Operar() de la clase Calculadora
         /// </summary>
         /// <param name="numero1"></param>
         /// <param name="numero2"></param>
@@ -58,16 +66,31 @@ namespace MiCalculadora
        
 
         //BOTONES
+        /// <summary>
+        /// el boton limpiar llama al metodo Limpiar() que pone todos los campos en blanco
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
         }
 
+        /// <summary>
+        /// El boton cerrar cierra el formulario 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Al cerrarse el formulario se presenta un mensaje que permite al usuario decidir si cerrar el formulario o seguir en el
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormCalculadora_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("¿Está seguro de querer salir?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -76,6 +99,13 @@ namespace MiCalculadora
             }
         }
 
+        /// <summary>
+        /// El boton operar ejecuta el metodo Operar con los datos que toma de los textbox y muestra el resultado
+        /// en el label correspondiente. Si el usuario intenta dividir por 0 muestra un mensaje de error
+        /// Agrega la operacion al listbox de operaciones 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOperar_Click(object sender, EventArgs e)
         {
             double resultado;
@@ -85,14 +115,15 @@ namespace MiCalculadora
 
             resultado = Operar(numero1, numero2, operador);
 
-            lblResultado.Text = resultado.ToString();
-
+            
             if (resultado==double.MinValue)
             {
+                
                 MessageBox.Show("Error. No es posible dividir por 0");
             }
             else
             {
+                lblResultado.Text = resultado.ToString();
                 if (operador == " ")
                 {
                     operador = "+";
